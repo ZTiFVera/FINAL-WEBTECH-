@@ -1,0 +1,106 @@
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NESTAR GAZE - Premium Streetwear</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <style>
+        .header-gradient { background: linear-gradient(135deg, #a8b5c7 0%, #c5cad5 100%); }
+        .hero-img { aspect-ratio: 3/4; object-fit: cover; transition: transform 0.5s; }
+        .hero-img:hover { transform: scale(1.05); }
+        .brand-item { letter-spacing: 3px; cursor: pointer; transition: all 0.3s; }
+        .brand-item:hover { transform: translateY(-2px); color: #555; }
+        .social-icon { font-size: 1.5rem; color: #1a1a1a; transition: transform 0.3s; }
+        .social-icon:hover { transform: translateY(-3px); }
+        .logo { font-size: 1.5rem; font-weight: 700; letter-spacing: 2px; }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <nav class="navbar navbar-expand-lg header-gradient sticky-top shadow-sm">
+        <div class="container-fluid px-4">
+            <a class="navbar-brand logo" href="index.html">NESTAR GAZE</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+                <ul class="navbar-nav gap-4">
+                    <li class="nav-item"><a class="nav-link text-dark fw-semibold" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link text-dark fw-semibold" href="shop.html">Shop All</a></li>
+                    <li class="nav-item"><a class="nav-link text-dark fw-semibold" href="shop.html#hoodies">Hoodies</a></li>
+                    <li class="nav-item"><a class="nav-link text-dark fw-semibold" href="shop.html#tees">Graphic Tees</a></li>
+                </ul>
+            </div>
+            <div class="d-flex gap-3">
+                <i class="bi bi-person-circle fs-4" role="button"></i>
+                <i class="bi bi-bag fs-4" role="button"></i>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <div class="container-fluid p-0">
+        <div class="row g-0">
+            <div class="col-md-4"><img src="https://images.unsplash.com/photo-1556821840-3a63f95609a7?w=800&q=80" class="w-100 hero-img" alt="Denim Hoodie"></div>
+            <div class="col-md-4"><img src="https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?w=800&q=80" class="w-100 hero-img" alt="Denim Hoodie"></div>
+            <div class="col-md-4"><img src="https://images.unsplash.com/photo-1620799139834-6b8f844fbe61?w=800&q=80" class="w-100 hero-img" alt="Denim Hoodie"></div>
+        </div>
+    </div>
+
+    <!-- Brands Section -->
+    <div class="header-gradient py-4">
+        <div class="container">
+            <div class="d-flex justify-content-around flex-wrap gap-3">
+                <div class="brand-item fw-bold">HUNTA</div>
+                <div class="brand-item fw-bold">PUMA</div>
+                <div class="brand-item fw-bold">NEW BALANCE</div>
+                <div class="brand-item fw-bold">LEVI'S</div>
+                <div class="brand-item fw-bold">UGG</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-light py-5 mt-5">
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-lg-4">
+                    <h4 class="logo mb-4">NESTAR GAZE</h4>
+                    <div class="d-flex gap-3">
+                        <a href="#" class="social-icon"><i class="bi bi-facebook"></i></a>
+                        <a href="#" class="social-icon"><i class="bi bi-twitter"></i></a>
+                        <a href="#" class="social-icon"><i class="bi bi-instagram"></i></a>
+                        <a href="#" class="social-icon"><i class="bi bi-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-4">
+                    <h6 class="fw-bold mb-3">CATEGORIES</h6>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="shop.html#hoodies" class="text-decoration-none text-dark">HOODIES</a></li>
+                        <li class="mb-2"><a href="shop.html#tees" class="text-decoration-none text-dark">GRAPHIC TEES</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-2 col-md-4">
+                    <h6 class="fw-bold mb-3">RESOURCES</h6>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="#" class="text-decoration-none text-dark">CONTACT</a></li>
+                        <li class="mb-2"><a href="#" class="text-decoration-none text-dark">HELP</a></li>
+                        <li class="mb-2"><a href="#" class="text-decoration-none text-dark">About US</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-4 col-md-4">
+                    <h6 class="fw-bold mb-3">SUBSCRIBE</h6>
+                    <input type="email" class="form-control mb-2" placeholder="Enter your email">
+                    <button class="btn btn-dark w-100">SEND</button>
+                </div>
+            </div>
+            <hr class="my-4">
+            <p class="text-center text-muted mb-0">&copy; 2025 Nestar Gaze. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
