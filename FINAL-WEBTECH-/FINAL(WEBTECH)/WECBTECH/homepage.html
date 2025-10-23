@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NESTAR GAZE - Premium Streetwear</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <style>
+        /* Header Styles */
+        .header-gradient { 
+            background: linear-gradient(135deg, #a8b5c7 0%, #c5cad5 100%); 
+        }
+
+        .logo { 
+            font-size: 1.5rem; 
+            font-weight: 700; 
+            letter-spacing: 2px; 
+        }
+
+        /* Hero Section */
+        .hero-section {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 0;
+            height: calc(100vh - 76px);
+        }
+
+        .hero-item {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .hero-item:hover img {
+            transform: scale(1.05);
+        }
+
+        /* Product Card Styles */
+        .product-card {
+            border: none;
+            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: pointer;
+            background: white;
+        }
+
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+        }
+
+        .product-img {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        .product-card:hover .product-img {
+            transform: scale(1.1);
+        }
+
+        .product-img-container {
+            overflow: hidden;
+            background: #f8f9fa;
+        }
+
+        /* Filter Styles */
+        .filter-checkbox {
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+        }
+
+        .filter-label {
+            font-size: 1rem;
+            letter-spacing: 1px;
+            cursor: pointer;
+            font-weight: 500;
+        }
+
+        /* Price Styles */
+        .price-current {
+            color: #d32f2f;
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+
+        .price-original {
+            color: #999;
+            text-decoration: line-through;
+        }
+
+        .discount-badge {
+            background: #d32f2f;
+            color: white;
+            padding: 0.3rem 0.6rem;
+            font-size: 0.75rem;
+            border-radius: 4px;
+            font-weight: 600;
+            display: inline-block;
+        }
+
+        /* Page Section Toggle */
+        .page-section {
+            display: none;
+        }
+
+        .page-section.active {
+            display: block;
+        }
+
+        /* Product Modal */
+        .product-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 9999;
+            overflow-y: auto;
+        }
+
+        .product-modal.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 8px;
+            max-width: 900px;
+            width: 100%;
+            position: relative;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: white;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10;
+        }
+
+        .modal-images {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            padding: 1rem;
+        }
+
+        .modal-img {
+            width: 100%;
+            aspect-ratio: 1;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+
+        .size-btn {
+            min-width: 60px;
+            padding: 0.5rem;
+            font-weight: 600;
+        }
+
+        .quantity-control {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .quantity-btn {
+            width: 35px;
+            height: 35px;
+            border: 1px solid #dee2e6;
+            background: white;
+            cursor: pointer;
+            font-size: 1.2rem;
+        }
+
+        .quantity-input {
+            width: 60px;
+            text-align: center;
+            border: 1px solid #dee2e6;
+            padding: 0.4rem;
+        }
+
+        .checkout-btn {
+            background: #1a1a1a;
+            color: white;
+            padding: 0.8rem 2rem;
+            border: none;
+            border-radius: 4px;
+            font-weight: 600;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero-section {
+                grid-template-columns: 1fr;
+                height: auto;
+            }
+            
+            .hero-item {
+                min-height: 400px;
+            }
+
+            .modal-images {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body style="background: #f5f5f5;">
+    <!-- Header -->
+    <nav class="navbar navbar-expand-lg header-gradient sticky-top shadow-sm">
+        <div class="container-fluid px-4">
+            <a class="navbar-brand logo" href="#" onclick="showPage('home')">NESTAR GAZE</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+                <ul class="navbar-nav gap-4">
+                    <li class="nav-item"><a class="nav-link text-dark fw-semibold" href="#" onclick="showPage('home')">Home</a></li>
+                    <li class="nav-item"><a class="nav-link text-dark fw-semibold" href="#" onclick="showPage('shop')">Shop All</a></li>
+                    <li class="nav-item"><a class="nav-link text-dark fw-semibold" href="#" onclick="showPage('shop', 'hoodies')">Hoodies</a></li>
+                    <li class="nav-item"><a class="nav-link text-dark fw-semibold" href="#" onclick="showPage('shop', 'tees')">Graphic Tees</a></li>
+                </ul>
+            </div>
+            <div class="d-flex gap-3">
+                <i class="bi bi-person-circle fs-4" role="button"></i>
+                <i class="bi bi-bag fs-4" role="button"></i>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HOME PAGE -->
+    <section id="home-page" class="page-section active">
+        <div class="hero-section">
+            <div class="hero-item">
+                <img src="https://images.unsplash.com/photo-1556821840-3a63f95609a7?w=1200&q=80" alt="Hoodie Back View">
+            </div>
+            <div class="hero-item">
+                <img src="https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?w=1200&q=80" alt="White Shirt Front">
+            </div>
+            <div class="hero-item">
+                <img src="https://images.unsplash.com/photo-1620799139834-6b8f844fbe61?w=1200&q=80" alt="White Shirts Stack">
+            </div>
+        </div>
+    </section>
+
+    <!-- SHOP PAGE -->
+    <section id="shop-page" class="page-section">
+        <div class="container py-5">
+            <div class="row">
+                <!-- Filters Sidebar -->
+                <div class="col-lg-2 mb-4">
+                    <div class="d-flex align-items-center gap-2 mb-3">
+                        <input type="checkbox" class="filter-checkbox" id="hoodies-filter" value="hoodies">
+                        <label class="filter-label mb-0" for="hoodies-filter">HOODIES</label>
+                    </div>
+                    <div class="d-flex align-items-center gap-2">
+                        <input type="checkbox" class="filter-checkbox" id="tees-filter" value="graphic-tees">
+                        <label class="filter-label mb-0" for="tees-filter">GRAPHIC TEES</label>
+                    </div>
+                </div>
+
+                <!-- Products Grid -->
+                <div class="col-lg-10">
+                    <div class="row g-4" id="products-grid">
+                        <!-- Product 1 -->
+                        <div class="col-lg-4 col-md-6 product-item" data-category="graphic-tees" onclick="openProductModal('Wild Frontier Oversized T-Shirt', '1,440.00', '2,400.00', '40% Off Black Friday Deal', 'graphic-tees')">
+                            <div class="card product-card h-100">
+                                <div class="product-img-container">
+                                    <img src="https://images.unsplash.com/photo-1618354691373-d851c5c3a990?w=600&q=80" class="product-img" alt="Wild Frontier T-Shirt">
+                                </div>
+                                <div class="card-body">
+                                    <h5 class="card-title mb-3">Wild Frontier Oversized T-Shirt</h5>
+                                    <div class="mb-3">
+                                        <label class="form-label fw-semibold small">Size:</label>
+                                        <div class="btn-group d-flex" role="group">
+                                            <input type="radio" class="btn-check" name="size1" id="size1-sm" checked>
+                                            <label class="btn btn-outline-dark btn-sm" for="size1-sm">S</label>
+                                            <input type="radio" class="btn-check" name="size1" id="size1-md">
+                                            <label class="btn btn-outline-dark btn-sm" for="size1-md">M</label>
+                                            <input type="radio" class="btn-check" name="size1" id="size1-lg">
+                                            <label class="btn btn-outline-dark btn-sm" for="size1-lg">L</label>
+                                            <input type="radio" class="btn-check" name="size1" id="size1-xl" disabled>
+                                            <label class="btn btn-outline-secondary btn-sm" for="size1-xl">XL</label>
+                                            <input type="radio" class="btn-check" name="size1" id="size1-xxl" disabled>
+                                            <label class="btn btn-outline-secondary btn-sm" for="size1-xxl">XXL</label>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex align-items-center gap-2 mb-2">
+                                        <span class="price-current">₱ 1,440.00</span>
+                                        <span class="price-original">₱ 2,400.00</span>
+                                    </div>
+                                    <span class="discount-badge">40% Off Black Friday Deal</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Product 2 -->
+                        <div class="col-lg-4 col-md-6 product-item" data-category="hoodies">
+                            <div class="card product-card h-100">
+                                <div class="product-img-container">
+                                    <img src="https://images.unsplash.com/photo-1556821840-3a63f95609a7?w=600&q=80" class="product-img" alt="Black Hoodie">
+                                </div>
+                                <div class="card-body">
+                                    <h5 class="card-title mb-3">Black Cool Pull Down Hoodie</h5>
+                                    <div class="mb-3">
+                                        <label class="form-label fw-semibold small">Size:</label>
+                                        <div class="btn-group d-flex" role="group">
+                                            <input type="radio" class="btn-check" name="size2" id="size2-sm" checked>
+                                            <label class="btn btn-outline-dark btn-sm" for="size2-sm">S</label>
+                                            <input type="radio" class="btn-check" name="size2" id="size2-md">
+                                            <label class="btn btn-outline-dark btn-sm" for="size2-md">M</label>
+                                            <input type="radio" class="btn-check" name="size2" id="size2-lg">
+                                            <label class="btn btn-outline-dark btn-sm" for="size2-lg">L</label>
+                                            <input type="radio" class="btn-check" name="size2" id="size2-xl" disabled>
+                                            <label class="btn btn-outline-secondary btn-sm" for="size2-xl">XL</label>
+                                            <input type="radio" class="btn-check" name="size2" id="size2-xxl" disabled>
+                                            <label class="btn btn-outline-secondary btn-sm" for="size2-xxl">XXL</label>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex align-items-center gap-2 mb-2">
+                                        <span class="price-current">₱ 1,440.00</span>
+                                        <span class="price-original">₱ 2,400.00</span>
+                                    </div>
+                                    <span class="discount-badge">40% Off Black Friday Deal</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Product 3 -->
+                        <div class="col-lg-4 col-md-6 product-item" data-category="graphic-tees">
+                            <div class="card product-card h-100">
+                                <div class="product-img-container">
+                                    <img src="https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?w=600&q=80" class="product-img" alt="Oasis Sun T-Shirt">
+                                </div>
+                                <div class="card-body">
+                                    <h5 class="card-title mb-3">Oasis Sun Oversized T-Shirt</h5>
+                                    <div class="mb-3">
+                                        <label class="form-label fw-semibold small">Size:</label>
+                                        <div class="btn-group d-flex" role="group">
+                                            <input type="radio" class="btn-check" name="size3" id="size3-sm" checked>
+                                            <label class="btn btn-outline-dark btn-sm" for="size3-sm">S</label>
+                                            <input type="radio" class="btn-check" name="size3" id="size3-md">
+                                            <label class="btn btn-outline-dark btn-sm" for="size3-md">M</label>
+                                            <input type="radio" class="btn-check" name="size3" id="size3-lg">
+                                            <label class="btn btn-outline-dark btn-sm" for="size3-lg">L</label>
+                                            <input type="radio" class="btn-check" name="size3" id="size3-xl" disabled>
+                                            <label class="btn btn-outline-secondary btn-sm" for="size3-xl">XL</label>
+                                            <input type="radio" class="btn-check" name="size3" id="size3-xxl" disabled>
+                                            <label class="btn btn-outline-secondary btn-sm" for="size3-xxl">XXL</label>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex align-items-center gap-2 mb-2">
+                                        <span class="price-current">₱ 1,680.00</span>
+                                        <span class="price-original">₱ 2,400.00</span>
+                                    </div>
+                                    <span class="discount-badge">30% Off Black Friday Deal</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Product 4 -->
+                        <div class="col-lg-4 col-md-6 product-item" data-category="graphic-tees">
+                            <div class="card product-card h-100">
+                                <div class="product-img-container">
+                                    <img src="https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=600&q=80" class="product-img" alt="Abstract T-Shirt">
+                                </div>
+                                <div class="card-body">
+                                    <h5 class="card-title mb-3">Abstract Design T-Shirt</h5>
+                                    <div class="mb-3">
+                                        <label class="form-label fw-semibold small">Size:</label>
+                                        <div class="btn-group d-flex" role="group">
+                                            <input type="radio" class="btn-check" name="size4" id="size4-sm" checked>
+                                            <label class="btn btn-outline-dark btn-sm" for="size4-sm">S</label>
+                                            <input type="radio" class="btn-check" name="size4" id="size4-md">
+                                            <label class="btn btn-outline-dark btn-sm" for="size4-md">M</label>
+                                            <input type="radio" class="btn-check" name="size4" id="size4-lg">
+                                            <label class="btn btn-outline-dark btn-sm" for="size4-lg">L</label>
+                                            <input type="radio" class="btn-check" name="size4" id="size4-xl" disabled>
+                                            <label class="btn btn-outline-secondary btn-sm" for="size4-xl">XL</label>
+                                            <input type="radio" class="btn-check" name="size4" id="size4-xxl" disabled>
+                                            <label class="btn btn-outline-secondary btn-sm" for="size4-xxl">XXL</label>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex align-items-center gap-2 mb-2">
+                                        <span class="price-current">₱ 1,440.00</span>
+                                        <span class="price-original">₱ 2,400.00</span>
+                                    </div>
+                                    <span class="discount-badge">40% Off Black Friday Deal</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Product 5 -->
+                        <div class="col-lg-4 col-md-6 product-item" data-category="hoodies">
+                            <div class="card product-card h-100">
+                                <div class="product-img-container">
+                                    <img src="https://images.unsplash.com/photo-1620799140188-3b2a02fd9a77?w=600&q=80" class="product-img" alt="Gray Hoodie">
+                                </div>
+                                <div class="card-body">
+                                    <h5 class="card-title mb-3">Urban Street Hoodie</h5>
+                                    <div class="mb-3">
+                                        <label class="form-label fw-semibold small">Size:</label>
+                                        <div class="btn-group d-flex" role="group">
+                                            <input type="radio" class="btn-check" name="size5" id="size5-sm" checked>
+                                            <label class="btn btn-outline-dark btn-sm" for="size5-sm">S</label>
+                                            <input type="radio" class="btn-check" name="size5" id="size5-md">
+                                            <label class="btn btn-outline-dark btn-sm" for="size5-md">M</label>
+                                            <input type="radio" class="btn-check" name="size5" id="size5-lg">
+                                            <label class="btn btn-outline-dark btn-sm" for="size5-lg">L</label>
+                                            <input type="radio" class="btn-check" name="size5" id="size5-xl" disabled>
+                                            <label class="btn btn-outline-secondary btn-sm" for="size5-xl">XL</label>
+                                            <input type="radio" class="btn-check" name="size5" id="size5-xxl" disabled>
+                                            <label class="btn btn-outline-secondary btn-sm" for="size5-xxl">XXL</label>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex align-items-center gap-2 mb-2">
+                                        <span class="price-current">₱ 1,680.00</span>
+                                        <span class="price-original">₱ 2,400.00</span>
+                                    </div>
+                                    <span class="discount-badge">30% Off Black Friday Deal</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Product 6 -->
+                        <div class="col-lg-4 col-md-6 product-item" data-category="graphic-tees">
+                            <div class="card product-card h-100">
+                                <div class="product-img-container">
+                                    <img src="https://images.unsplash.com/photo-1576566588028-4147f3842f27?w=600&q=80" class="product-img" alt="Beige T-Shirt">
+                                </div>
+                                <div class="card-body">
+                                    <h5 class="card-title mb-3">Modern Art Oversized Tee</h5>
+                                    <div class="mb-3">
+                                        <label class="form-label fw-semibold small">Size:</label>
+                                        <div class="btn-group d-flex" role="group">
+                                            <input type="radio" class="btn-check" name="size6" id="size6-sm" checked>
+                                            <label class="btn btn-outline-dark btn-sm" for="size6-sm">S</label>
+                                            <input type="radio" class="btn-check" name="size6" id="size6-md">
+                                            <label class="btn btn-outline-dark btn-sm" for="size6-md">M</label>
+                                            <input type="radio" class="btn-check" name="size6" id="size6-lg">
+                                            <label class="btn btn-outline-dark btn-sm" for="size6-lg">L</label>
+                                            <input type="radio" class="btn-check" name="size6" id="size6-xl" disabled>
+                                            <label class="btn btn-outline-secondary btn-sm" for="size6-xl">XL</label>
+                                            <input type="radio" class="btn-check" name="size6" id="size6-xxl" disabled>
+                                            <label class="btn btn-outline-secondary btn-sm" for="size6-xxl">XXL</label>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex align-items-center gap-2 mb-2">
+                                        <span class="price-current">₱ 1,440.00</span>
+                                        <span class="price-original">₱ 2,400.00</span>
+                                    </div>
+                                    <span class="discount-badge">40% Off Black Friday Deal</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Product Modal -->
+    <div class="product-modal" id="productModal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeProductModal()">&times;</button>
+            
+            <div class="row g-0">
+                <!-- Left Side - Images -->
+                <div class="col-md-6 p-3">
+                    <div class="modal-images">
+                        <img src="https://images.unsplash.com/photo-1620799140188-3b2a02fd9a77?w=600&q=80" class="modal-img" alt="Product Front">
+                        <img src="https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?w=600&q=80" class="modal-img" alt="Product Back">
+                    </div>
+                </div>
+
+                <!-- Right Side - Details -->
+                <div class="col-md-6 p-4">
+                    <!-- Mini Product Image -->
+                    <div class="d-flex align-items-start gap-3 mb-3">
+                        <img src="https://images.unsplash.com/photo-1620799140188-3b2a02fd9a77?w=100&q=80" width="60" height="60" style="object-fit: cover; border-radius: 4px;" alt="Product Thumbnail">
+                        <div class="flex-grow-1">
+                            <h5 class="mb-1" id="modalProductName">Product Name</h5>
+                            <p class="mb-0 small text-muted">SMALL<br>1 x Php <span id="modalPrice">1,440</span></p>
+                        </div>
+                    </div>
+
+                    <hr>
+
+                    <!-- Price -->
+                    <div class="mb-3">
+                        <span class="price-current fs-5" id="modalCurrentPrice">₱ 1,440.00</span>
+                        <span class="price-original ms-2" id="modalOriginalPrice">₱ 2,400.00</span>
+                        <div class="mt-2">
+                            <span class="discount-badge" id="modalDiscount">40% Off Black Friday Deal</span>
+                        </div>
+                    </div>
+
+                    <!-- Color -->
+                    <div class="mb-3">
+                        <label class="form-label fw-semibold">Color: <span class="text-uppercase">BROWN</span></label>
+                    </div>
+
+                    <!-- Size Selection -->
+                    <div class="mb-3">
+                        <label class="form-label fw-semibold">Size: <span id="selectedSize">SMALL</span></label>
+                        <div class="btn-group d-flex" role="group">
+                            <input type="radio" class="btn-check" name="modalSize" id="modal-sm" checked onchange="updateSize('SMALL')">
+                            <label class="btn btn-outline-dark size-btn" for="modal-sm">SML</label>
+                            <input type="radio" class="btn-check" name="modalSize" id="modal-md" onchange="updateSize('MEDIUM')">
+                            <label class="btn btn-outline-dark size-btn" for="modal-md">MED</label>
+                            <input type="radio" class="btn-check" name="modalSize" id="modal-lg" onchange="updateSize('LARGE')">
+                            <label class="btn btn-outline-dark size-btn" for="modal-lg">LRG</label>
+                            <input type="radio" class="btn-check" name="modalSize" id="modal-xl" disabled>
+                            <label class="btn btn-outline-secondary size-btn" for="modal-xl">XLG</label>
+                            <input type="radio" class="btn-check" name="modalSize" id="modal-xxl" disabled>
+                            <label class="btn btn-outline-secondary size-btn" for="modal-xxl">XXL</label>
+                        </div>
+                        <small class="text-muted d-block mt-2">FIT: True to size</small>
+                    </div>
+
+                    <!-- Trending Views -->
+                    <div class="mb-3">
+                        <small class="text-danger"><i class="bi bi-fire"></i> Trending Now 964 views</small>
+                    </div>
+
+                    <!-- Quantity -->
+                    <div class="mb-4">
+                        <label class="form-label fw-semibold">Quantity:</label>
+                        <div class="quantity-control">
+                            <button class="quantity-btn" onclick="decreaseQty()">-</button>
+                            <input type="number" class="quantity-input" id="quantity" value="1" min="1" readonly>
+                            <button class="quantity-btn" onclick="increaseQty()">+</button>
+                            <button class="btn btn-dark ms-3" style="padding: 0.4rem 1.5rem;">ADD TO CART</button>
+                        </div>
+                    </div>
+
+                    <p class="small text-muted mb-4">Sold Out? Select is another size.</p>
+
+                    <!-- Sub Total -->
+                    <div class="d-flex justify-content-between mb-3">
+                        <span class="fw-semibold">Sub Total</span>
+                        <span class="fw-semibold">Php <span id="modalSubtotal">1,440</span></span>
+                    </div>
+
+                    <!-- Checkout Button -->
+                    <button class="checkout-btn mb-3">READY TO CHECK OUT</button>
+
+                    <!-- Details Section -->
+                    <div class="mt-4">
+                        <h6 class="fw-bold mb-2">DETAILS</h6>
+                        <p class="small text-muted">
+                            Premium quality streetwear hoodie with vintage wash finish. 
+                            Made from comfortable cotton blend fabric. Perfect for casual everyday wear.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Page Navigation Function
+        function showPage(page, filter = null) {
+            // Hide all pages
+            document.querySelectorAll('.page-section').forEach(section => {
+                section.classList.remove('active');
+            });
+            
+            // Show selected page
+            if (page === 'home') {
+                document.getElementById('home-page').classList.add('active');
+            } else if (page === 'shop') {
+                document.getElementById('shop-page').classList.add('active');
+                
+                // Apply filter if provided
+                if (filter) {
+                    document.querySelectorAll('.filter-checkbox').forEach(cb => cb.checked = false);
+                    if (filter === 'hoodies') {
+                        document.getElementById('hoodies-filter').checked = true;
+                    } else if (filter === 'tees') {
+                        document.getElementById('tees-filter').checked = true;
+                    }
+                    filterProducts();
+                }
+            }
+        }
+
+        // Filter Products Function
+        function filterProducts() {
+            const selectedFilters = Array.from(document.querySelectorAll('.filter-checkbox'))
+                .filter(cb => cb.checked)
+                .map(cb => cb.value);
+            
+            document.querySelectorAll('.product-item').forEach(product => {
+                const category = product.dataset.category;
+                product.style.display = selectedFilters.length === 0 || selectedFilters.includes(category) ? 'block' : 'none';
+            });
+        }
+
+        // Add event listeners to filters
+        document.addEventListener('DOMContentLoaded', function() {
+            document.querySelectorAll('.filter-checkbox').forEach(filter => {
+                filter.addEventListener('change', filterProducts);
+            });
+        });
+
+        // Product Modal Functions
+        function openProductModal(name, price, originalPrice, discount, category) {
+            document.getElementById('modalProductName').textContent = name;
+            document.getElementById('modalCurrentPrice').textContent = '₱ ' + price;
+            document.getElementById('modalOriginalPrice').textContent = '₱ ' + originalPrice;
+            document.getElementById('modalDiscount').textContent = discount;
+            document.getElementById('modalPrice').textContent = price.replace(',', '');
+            document.getElementById('modalSubtotal').textContent = price.replace(',', '');
+            document.getElementById('productModal').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeProductModal() {
+            document.getElementById('productModal').classList.remove('active');
+            document.body.style.overflow = 'auto';
+            document.getElementById('quantity').value = 1;
+        }
+
+        function updateSize(size) {
+            document.getElementById('selectedSize').textContent = size;
+        }
+
+        function increaseQty() {
+            const qtyInput = document.getElementById('quantity');
+            qtyInput.value = parseInt(qtyInput.value) + 1;
+            updateSubtotal();
+        }
+
+        function decreaseQty() {
+            const qtyInput = document.getElementById('quantity');
+            if (parseInt(qtyInput.value) > 1) {
+                qtyInput.value = parseInt(qtyInput.value) - 1;
+                updateSubtotal();
+            }
+        }
+
+        function updateSubtotal() {
+            const qty = parseInt(document.getElementById('quantity').value);
+            const price = parseFloat(document.getElementById('modalPrice').textContent);
+            const subtotal = (qty * price).toFixed(2);
+            document.getElementById('modalSubtotal').textContent = subtotal.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        }
+
+        // Close modal when clicking outside
+        document.addEventListener('click', function(event) {
+            const modal = document.getElementById('productModal');
+            if (event.target === modal) {
+                closeProductModal();
+            }
+        });
+    </script>
+</body>
+</html>
