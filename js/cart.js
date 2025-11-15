@@ -1,4 +1,4 @@
- // Enhanced Cart System with localStorage
+  
 let cartItems = [];
 
 // Initialize cart from localStorage
@@ -29,26 +29,23 @@ function addToCart(productId, quantity = 1, size = 'M', color = 'Black') {
         showNotification('Product not found', 'error');
         return;
     }
-    
-    // Check if exact item exists
     const existingItem = cartItems.find(item => 
         item.id === productId && 
         item.size === size && 
         item.color === color
     );
-    
     if (existingItem) {
         existingItem.quantity += quantity;
     } else {
+        const cartItemId = String(Date.now() + Math.random());
         cartItems.push({ 
             ...product, 
             quantity,
             size: size,
             color: color,
-            cartItemId: Date.now() + Math.random()
+            cartItemId: cartItemId
         });
     }
-    
     updateCartCount();
     renderCart();
     saveCart();
@@ -57,9 +54,10 @@ function addToCart(productId, quantity = 1, size = 'M', color = 'Black') {
 
 // Remove from cart by cart item ID
 function removeFromCart(cartItemId) {
-    const item = cartItems.find(i => i.cartItemId === cartItemId);
+    const idStr = String(cartItemId);
+    const item = cartItems.find(i => String(i.cartItemId) === idStr);
     if (item) {
-        cartItems = cartItems.filter(i => i.cartItemId !== cartItemId);
+        cartItems = cartItems.filter(i => String(i.cartItemId) !== idStr);
         updateCartCount();
         renderCart();
         saveCart();
@@ -69,7 +67,8 @@ function removeFromCart(cartItemId) {
 
 // Update cart quantity
 function updateCartQuantity(cartItemId, newQuantity) {
-    const item = cartItems.find(i => i.cartItemId === cartItemId);
+    const idStr = String(cartItemId);
+    const item = cartItems.find(i => String(i.cartItemId) === idStr);
     if (item) {
         item.quantity = Math.max(1, Math.min(10, newQuantity));
         renderCart();
@@ -92,7 +91,6 @@ function updateCartCount() {
 function renderCart() {
     const cartItemsContainer = document.getElementById('cartItems');
     if (!cartItemsContainer) return;
-    
     if (cartItems.length === 0) {
         cartItemsContainer.innerHTML = `
             <div class="empty-cart">
@@ -104,7 +102,6 @@ function renderCart() {
         updateCartTotal();
         return;
     }
-    
     cartItemsContainer.innerHTML = cartItems.map(item => `
         <div class="cart-item">
             <img src="${item.img}" alt="${item.name}" class="cart-item-img" 
@@ -132,7 +129,6 @@ function renderCart() {
             </div>
         </div>
     `).join('');
-    
     updateCartTotal();
 }
 
@@ -141,13 +137,10 @@ function updateCartTotal() {
     const subtotal = cartItems.reduce((sum, item) => sum + (item.price * item.quantity), 0);
     const shipping = subtotal >= 5000 ? 0 : 150;
     const total = subtotal + shipping;
-    
     const cartTotal = document.getElementById('cartTotal');
     if (cartTotal) {
         cartTotal.textContent = `₱${total.toLocaleString()}.00`;
     }
-    
-    // Update footer if it exists
     const cartFooter = document.querySelector('.cart-footer');
     if (cartFooter) {
         cartFooter.innerHTML = `
@@ -182,12 +175,9 @@ function updateCartTotal() {
 function toggleCart() {
     const cartSidebar = document.getElementById('cartSidebar');
     const backdrop = document.getElementById('backdrop');
-    
     if (!cartSidebar || !backdrop) return;
-    
     cartSidebar.classList.toggle('active');
     backdrop.classList.toggle('active');
-    
     if (cartSidebar.classList.contains('active')) {
         document.body.style.overflow = 'hidden';
         renderCart();
@@ -196,26 +186,24 @@ function toggleCart() {
     }
 }
 
-// Checkout function
+// Checkout function: navigate to cart page (full page) using helper if present
 function checkout() {
     if (cartItems.length === 0) {
         showNotification('Your cart is empty', 'error');
         return;
     }
-    
     const subtotal = cartItems.reduce((sum, item) => sum + (item.price * item.quantity), 0);
     const shipping = subtotal >= 5000 ? 0 : 150;
     const total = subtotal + shipping;
-    
     showNotification(`Proceeding to checkout - Total: ₱${total.toLocaleString()}.00`, 'success');
-    
-    // In production, redirect to checkout page
-    console.log('Checkout initiated:', {
-        items: cartItems,
-        subtotal: subtotal,
-        shipping: shipping,
-        total: total
-    });
+    // Navigate to full cart page if helper exists
+    if (typeof window.goToPagesPage === 'function') {
+        const page = window.location.pathname.includes('/pages/') ? 'cart.html' : 'pages/cart.html';
+        window.goToPagesPage(page);
+    } else {
+        // fallback: open cart page
+        window.location.href = window.location.pathname.includes('/pages/') ? 'cart.html' : 'pages/cart.html';
+    }
 }
 
 // Initialize cart on page load

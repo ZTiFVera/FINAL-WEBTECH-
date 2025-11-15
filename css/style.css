@@ -1749,3 +1749,181 @@ html {
     background: var(--primary-dark);
     color: #fff;
 }
+
+/* --- PacSun-like small tweaks for cart drawer, wishlist grid and image hover --- */
+/* Cart drawer header style */
+.cart-sidebar .cart-header {
+    font-weight: 900;
+    letter-spacing: 0.6px;
+    background: #fff;
+}
+
+/* Checkout button bigger in drawer */
+.cart-footer .btn-checkout {
+    background: #111;
+    color: #fff;
+    padding: 14px;
+    width: 100%;
+    font-weight: 800;
+    border-radius: 2px;
+}
+
+/* Smaller wishlist badge */
+#wishlistCount {
+    position: absolute;
+    top: -6px;
+    right: -6px;
+    width: 16px;
+    height: 16px;
+    font-size: 10px;
+    line-height: 16px;
+    padding: 0;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Wishlist grid uses product-card look but smaller images */
+.wishlist-grid .product-img-wrapper {
+    aspect-ratio: 3/4;
+    max-height: 420px;
+}
+
+/* Cart item image hover pointer */
+.bag-item img, .product-img-wrapper img {
+    cursor: pointer;
+}
+
+/* Make cart drawer footer sticky */
+.cart-sidebar .cart-footer {
+    border-top: 1px solid var(--border-gray);
+    padding: 18px;
+}
+
+/* Adjust product-card font sizing in wishlist area */
+.wish-product-card .product-name {
+    font-size: 14px;
+}
+
+/* ------------------ Additional site-footer and accessibility + usability overrides ------------------ */
+
+/* Make .site-footer an alias for footer to ensure pages using class="site-footer" match footer {} styling */
+.site-footer {
+    background: #0a0a0a;
+    color: #fff;
+    padding: 80px 0 32px;
+}
+
+/* Reuse footer grid rules for .site-footer */
+.site-footer .footer-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 48px;
+    margin-bottom: 48px;
+}
+
+.site-footer .footer-col h5 {
+    font-size: 13px;
+    font-weight: 900;
+    margin-bottom: 24px;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+}
+
+.site-footer .footer-col ul {
+    list-style: none;
+}
+
+.site-footer .footer-col ul li {
+    margin-bottom: 12px;
+}
+
+.site-footer .footer-col ul li a {
+    color: #999;
+    text-decoration: none;
+    font-size: 13px;
+    transition: color 0.2s;
+}
+
+.site-footer .footer-col ul li a:hover {
+    color: #fff;
+}
+
+.site-footer .footer-bottom {
+    border-top: 1px solid #222;
+    padding-top: 32px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 12px;
+    color: #666;
+}
+
+.site-footer .footer-right a {
+    color: #666;
+    text-decoration: none;
+    margin: 0 16px;
+    transition: color 0.2s;
+}
+.site-footer .footer-right a:hover { color: #fff; }
+
+/* Header icon/button sizing and consistent appearance */
+.icon-btn-custom {
+    background: none;
+    border: none;
+    font-size: 20px;
+    color: var(--primary-dark);
+    cursor: pointer;
+    transition: opacity 0.2s, transform 0.12s;
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+}
+
+/* Slight hover affordance */
+.icon-btn-custom:hover { transform: translateY(-2px); opacity: 0.9; }
+
+/* Ensure product-card hearts are visible and tappable (fixes unclickable heart issues) */
+.product-wishlist-btn {
+    opacity: 1 !important;
+    pointer-events: auto !important;
+    background: rgba(255,255,255,0.95);
+    backdrop-filter: blur(6px);
+    width: 42px;
+    height: 42px;
+    right: 12px;
+    top: 12px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    z-index: 20;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    transition: transform 0.14s ease, box-shadow 0.14s ease;
+}
+
+.product-wishlist-btn:active,
+.product-wishlist-btn:focus {
+    transform: scale(0.98);
+    outline: none;
+}
+
+.product-wishlist-btn i { font-size: 18px; }
+
+.product-wishlist-btn:focus {
+    box-shadow: 0 0 0 3px rgba(26,26,26,0.06);
+}
+
+/* Keep quick view and quick-add visible to match clickable hearts */
+.product-quick-view,
+.product-quick-add {
+    opacity: 1 !important;
+}
+
+/* End of style.css */
