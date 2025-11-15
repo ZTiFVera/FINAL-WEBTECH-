@@ -1,0 +1,300 @@
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Details - NESTAR GAZE</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/product-detail-page.css">
+    <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+    <!-- Promo Bar -->
+    <div class="promo-bar">
+        <div class="promo-content">
+            FREE SHIPPING ON ORDERS OVER ₱5,000 • SHOP NEW ARRIVALS
+            <button class="promo-close" onclick="closePromo()"><i class="fas fa-times"></i></button>
+        </div>
+    </div>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-custom">
+        <div class="container-lg">
+            <a class="navbar-brand navbar-brand-custom" href="index.html">NESTAR GAZE</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link nav-link-custom dropdown-toggle" href="pages/new.html" role="button" data-bs-toggle="dropdown">New</a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="pages/new.html">Just In</a></li>
+                            <li><a class="dropdown-item" href="pages/shop.html">All Products</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link nav-link-custom dropdown-toggle" href="pages/shop.html" role="button" data-bs-toggle="dropdown">Shop</a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="pages/shop.html">All Products</a></li>
+                            <li><a class="dropdown-item" href="pages/hoodies.html">Hoodies</a></li>
+                            <li><a class="dropdown-item" href="pages/tees.html">Graphic Tees</a></li>
+                            <li><a class="dropdown-item" href="pages/pants.html">Pants</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item"><a class="nav-link nav-link-custom" href="pages/sale.html">Sale</a></li>
+                </ul>
+            </div>
+            <div class="ms-auto d-flex gap-3 align-items-center navbar-icons">
+                <div class="search-bar-custom">
+                    <input type="text" id="searchInput" placeholder="Search products..." onkeyup="liveSearch()">
+                    <i class="fas fa-search"></i>
+                </div>
+                <button class="icon-btn-custom" onclick="openWishlist()" title="Wishlist">
+                    <i class="far fa-heart"></i>
+                    <span class="badge bg-danger" id="wishlistCount" style="display:none;">0</span>
+                </button>
+                <button class="icon-btn-custom" id="cartBtn" onclick="toggleCart()" title="Cart">
+                    <i class="fas fa-shopping-bag"></i>
+                    <span class="cart-badge" id="cartCount">0</span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <div class="search-dropdown" id="searchDropdown" style="display:none;"></div>
+
+    <!-- Breadcrumb -->
+    <div class="breadcrumb-section">
+        <div class="container-lg">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb" id="breadcrumb">
+                    <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                    <li class="breadcrumb-item"><a href="pages/shop.html">Shop</a></li>
+                    <li class="breadcrumb-item active" id="breadcrumbProduct">Product</li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+
+    <!-- Product Detail Section -->
+    <section class="product-detail-section">
+        <div class="container-lg">
+            <div class="product-detail-container">
+                <!-- Left: Image Gallery -->
+                <div class="product-images">
+                    <div class="main-image" id="mainImageContainer">
+                        <img id="mainImage" src="" alt="Product">
+                        <button class="wishlist-floating-btn" id="wishlistFloatingBtn" onclick="toggleWishlistFromPage()">
+                            <i class="far fa-heart"></i>
+                        </button>
+                    </div>
+                    <div class="thumbnail-images" id="thumbnailImages">
+                        <!-- Thumbnails populated by JS -->
+                    </div>
+                </div>
+
+                <!-- Right: Product Info -->
+                <div class="product-info-detail">
+                    <div class="product-brand-detail" id="productBrand">NESTAR GAZE</div>
+                    <h1 class="product-title-detail" id="productTitle">Product Name</h1>
+                    
+                    <div class="price-section">
+                        <div class="current-price" id="currentPrice">₱0.00</div>
+                        <div class="old-price" id="oldPrice" style="display:none;"></div>
+                        <div class="discount-badge" id="discountBadge" style="display:none;"></div>
+                    </div>
+
+                    <div class="rating-section" id="ratingSection">
+                        <div class="stars">★★★★★</div>
+                        <span class="rating-count">(0 reviews)</span>
+                    </div>
+
+                    <!-- Trending Badge -->
+                    <div class="trending-badge" id="trendingBadge" style="display:none;">
+                        <i class="fas fa-fire"></i> Trending Now: <span id="trendingViews">0</span> views in past 24 hours!
+                    </div>
+
+                    <!-- Color Selection -->
+                    <div class="selection-group">
+                        <label class="selection-label">Color: <span id="selectedColorName">-</span></label>
+                        <div class="color-options" id="colorOptions">
+                            <!-- Populated by JS -->
+                        </div>
+                    </div>
+
+                    <!-- Size Selection -->
+                    <div class="selection-group">
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                            <label class="selection-label">Size: <span id="selectedSizeName">-</span></label>
+                            <a href="#" class="size-guide-link">Size Guide</a>
+                        </div>
+                        <div class="size-options" id="sizeOptions">
+                            <!-- Populated by JS -->
+                        </div>
+                        <div class="size-unavailable-msg" id="sizeUnavailableMsg" style="display:none;">
+                            <i class="fas fa-info-circle"></i> Size or item unavailable? <a href="#">Tap Notify Me for restock alerts</a>
+                        </div>
+                    </div>
+
+                    <!-- Quantity -->
+                    <div class="selection-group">
+                        <label class="selection-label">Quantity:</label>
+                        <div class="quantity-controls">
+                            <button class="qty-btn-detail" onclick="changeQuantity(-1)">−</button>
+                            <input type="text" class="qty-input" id="quantityInput" value="1" readonly>
+                            <button class="qty-btn-detail" onclick="changeQuantity(1)">+</button>
+                        </div>
+                    </div>
+
+                    <!-- Add to Cart Button -->
+                    <button class="btn-add-to-bag" id="addToBagBtn" onclick="addToBagFromPage()">
+                        <i class="fas fa-shopping-bag"></i> ADD TO BAG
+                    </button>
+
+                    <!-- Product Details Accordion -->
+                    <div class="details-accordion">
+                        <div class="accordion-item-detail active">
+                            <button class="accordion-header-detail" onclick="toggleAccordion(this)">
+                                <span>DETAILS</span>
+                                <i class="fas fa-chevron-down"></i>
+                            </button>
+                            <div class="accordion-content-detail" style="display:block;">
+                                <p id="productDescription">Premium quality streetwear designed for comfort and style.</p>
+                                <ul id="productFeatures">
+                                    <li>100% Premium Cotton</li>
+                                    <li>Pre-shrunk fabric</li>
+                                    <li>Machine washable</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="accordion-item-detail">
+                            <button class="accordion-header-detail" onclick="toggleAccordion(this)">
+                                <span>ABOUT THE BRAND</span>
+                                <i class="fas fa-chevron-down"></i>
+                            </button>
+                            <div class="accordion-content-detail">
+                                <p><strong>NESTAR GAZE</strong> - Premium streetwear brand dedicated to delivering quality, style, and comfort. Each piece is crafted with attention to detail and designed for the modern urban lifestyle.</p>
+                            </div>
+                        </div>
+
+                        <div class="accordion-item-detail">
+                            <button class="accordion-header-detail" onclick="toggleAccordion(this)">
+                                <span>SHIPPING & RETURNS</span>
+                                <i class="fas fa-chevron-down"></i>
+                            </button>
+                            <div class="accordion-content-detail">
+                                <ul>
+                                    <li><i class="fas fa-shipping-fast"></i> Free shipping on orders over ₱5,000</li>
+                                    <li><i class="fas fa-undo"></i> 30-day return policy</li>
+                                    <li><i class="fas fa-shield-alt"></i> 1-year warranty</li>
+                                    <li><i class="fas fa-credit-card"></i> Secure checkout</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- You May Also Like Section -->
+    <section class="related-section">
+        <div class="container-lg">
+            <h2 class="section-title">You May Also Like</h2>
+            <div class="product-grid" id="relatedProducts">
+                <!-- Populated by JS -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Cart Sidebar -->
+    <div class="cart-sidebar" id="cartSidebar">
+        <div class="cart-header">
+            <h4>Shopping Cart</h4>
+            <button onclick="toggleCart()" class="close-btn"><i class="fas fa-times"></i></button>
+        </div>
+        <div class="cart-items" id="cartItems">
+            <p class="empty-cart">Your cart is empty</p>
+        </div>
+        <div class="cart-footer">
+            <div class="cart-total">
+                <strong>Total:</strong>
+                <span id="cartTotal">₱0.00</span>
+            </div>
+            <button class="btn-checkout" onclick="checkout()">Checkout</button>
+            <button class="btn-continue" onclick="toggleCart()">Continue Shopping</button>
+        </div>
+    </div>
+
+    <!-- Wishlist Sidebar -->
+    <div class="wishlist-sidebar" id="wishlistSidebar">
+        <div class="wishlist-header">
+            <h4>Wishlist</h4>
+            <button onclick="closeAllSidebars()" class="close-btn"><i class="fas fa-times"></i></button>
+        </div>
+        <div class="wishlist-items" id="wishlistItems">
+            <p class="empty-wishlist">Your wishlist is empty</p>
+        </div>
+    </div>
+
+    <div class="toast-notification" id="notification"></div>
+    <div class="sidebar-backdrop" id="backdrop" onclick="closeAllSidebars()"></div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container-lg">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h5>Get Help</h5>
+                    <ul>
+                        <li><a href="#">Order Status</a></li>
+                        <li><a href="#">Shipping Info</a></li>
+                        <li><a href="#">Returns</a></li>
+                        <li><a href="#">Contact Us</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h5>About</h5>
+                    <ul>
+                        <li><a href="#">Our Story</a></li>
+                        <li><a href="#">News</a></li>
+                        <li><a href="#">Careers</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h5>Shop</h5>
+                    <ul>
+                        <li><a href="pages/shop.html">All Products</a></li>
+                        <li><a href="pages/hoodies.html">Hoodies</a></li>
+                        <li><a href="pages/tees.html">Graphic Tees</a></li>
+                        <li><a href="pages/sale.html">Sale</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h5>Follow Us</h5>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div>&copy; 2025 NESTAR GAZE. All Rights Reserved.</div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
+    <script src="js/products.js"></script>
+    <script src="js/notifications.js"></script>
+    <script src="js/cart.js"></script>
+    <script src="js/wishlist.js"></script>
+    <script src="js/search.js"></script>
+    <script src="js/product-page-handler.js"></script>
+</body>
+</html>

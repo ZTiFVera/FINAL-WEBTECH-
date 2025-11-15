@@ -1,0 +1,190 @@
+  <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Graphic Tees - NESTAR GAZE</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/responsive.css">
+</head>
+<body>
+    <!-- Promo Bar -->
+    <div class="promo-bar">
+        <div class="promo-content">
+            FREE SHIPPING ON ORDERS OVER ₱5,000 • SHOP NEW ARRIVALS
+            <button class="promo-close" onclick="closePromo()"><i class="fas fa-times"></i></button>
+        </div>
+    </div>
+
+    <!-- Navbar (same as hoodies.html) -->
+    <nav class="navbar navbar-expand-lg navbar-custom">
+        <div class="container-lg">
+            <a class="navbar-brand navbar-brand-custom" href="../index.html">NESTAR GAZE</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link nav-link-custom dropdown-toggle" href="new.html" role="button" data-bs-toggle="dropdown">New</a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="new.html">Just In</a></li>
+                            <li><a class="dropdown-item" href="shop.html">All Products</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link nav-link-custom dropdown-toggle" href="shop.html" role="button" data-bs-toggle="dropdown">Shop</a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="shop.html">All Products</a></li>
+                            <li><a class="dropdown-item" href="hoodies.html">Hoodies</a></li>
+                            <li><a class="dropdown-item" href="tees.html">Graphic Tees</a></li>
+                            <li><a class="dropdown-item" href="pants.html">Pants</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item"><a class="nav-link nav-link-custom" href="sale.html">Sale</a></li>
+                </ul>
+            </div>
+            <div class="ms-auto d-flex gap-3 align-items-center navbar-icons">
+                <div class="search-bar-custom">
+                    <input type="text" id="searchInput" placeholder="Search products..." onkeyup="liveSearch()">
+                    <i class="fas fa-search"></i>
+                </div>
+                <button class="icon-btn-custom" onclick="openWishlist()" title="Wishlist">
+                    <i class="far fa-heart"></i>
+                    <span class="badge bg-danger" id="wishlistCount" style="display:none;">0</span>
+                </button>
+                <button class="icon-btn-custom" id="cartBtn" onclick="toggleCart()" title="Cart">
+                    <i class="fas fa-shopping-bag"></i>
+                    <span class="cart-badge" id="cartCount">0</span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <div class="search-dropdown" id="searchDropdown" style="display:none;"></div>
+
+    <section class="page-header">
+        <div class="container-lg">
+            <h1>Graphic Tees</h1>
+            <p>Express Your Style</p>
+        </div>
+    </section>
+
+    <section class="filter-section">
+        <div class="container-lg">
+            <div class="filter-controls">
+                <button class="filter-btn active" onclick="loadCategory('tees', 'tees')">All Tees</button>
+                <button class="filter-btn" onclick="sortByPrice('low')">Price: Low to High</button>
+                <button class="filter-btn" onclick="sortByPrice('high')">Price: High to Low</button>
+                <button class="filter-btn" onclick="sortByRating()">Top Rated</button>
+            </div>
+        </div>
+    </section>
+
+    <section class="products-section">
+        <div class="container-lg">
+            <div class="product-grid" id="productGrid"></div>
+            <div id="noResults" class="text-center" style="display:none; padding: 60px 20px;">
+                <i class="fas fa-box-open" style="font-size: 64px; opacity: 0.3; margin-bottom: 20px; display: block;"></i>
+                <h4>No tees available</h4>
+            </div>
+        </div>
+    </section>
+
+    <!-- Cart/Wishlist Sidebars (same as other pages) -->
+    <div class="cart-sidebar" id="cartSidebar">
+        <div class="cart-header">
+            <h4>Shopping Cart</h4>
+            <button onclick="toggleCart()" class="close-btn"><i class="fas fa-times"></i></button>
+        </div>
+        <div class="cart-items" id="cartItems">
+            <p class="empty-cart">Your cart is empty</p>
+        </div>
+        <div class="cart-footer"></div>
+    </div>
+
+    <div class="wishlist-sidebar" id="wishlistSidebar">
+        <div class="wishlist-header">
+            <h4>Wishlist</h4>
+            <button onclick="closeAllSidebars()" class="close-btn"><i class="fas fa-times"></i></button>
+        </div>
+        <div class="wishlist-items" id="wishlistItems">
+            <p class="empty-wishlist">Your wishlist is empty</p>
+        </div>
+    </div>
+
+    <div class="toast-notification" id="notification"></div>
+    <div id="productModal" class="product-modal"></div>
+
+    <!-- Footer (same as other pages) -->
+    <footer>
+        <div class="container-lg">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h5>Get Help</h5>
+                    <ul>
+                        <li><a href="#">Order Status</a></li>
+                        <li><a href="#">Shipping Info</a></li>
+                        <li><a href="#">Returns</a></li>
+                        <li><a href="#">Contact Us</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h5>About</h5>
+                    <ul>
+                        <li><a href="#">Our Story</a></li>
+                        <li><a href="#">News</a></li>
+                        <li><a href="#">Careers</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h5>Shop</h5>
+                    <ul>
+                        <li><a href="shop.html">All Products</a></li>
+                        <li><a href="hoodies.html">Hoodies</a></li>
+                        <li><a href="tees.html">Graphic Tees</a></li>
+                        <li><a href="sale.html">Sale</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h5>Follow Us</h5>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                    </div>
+                    <div class="newsletter-signup">
+                        <input type="email" placeholder="Enter your email" id="emailInput">
+                        <button onclick="subscribeNewsletter()" class="btn-subscribe">Subscribe</button>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div>&copy; 2025 NESTAR GAZE. All Rights Reserved.</div>
+                <div><a href="#">Privacy Policy</a><a href="#">Terms of Use</a></div>
+            </div>
+        </div>
+    </footer>
+
+    <div class="sidebar-backdrop" id="backdrop" onclick="closeAllSidebars()"></div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
+    <script src="../js/products.js"></script>
+    <script src="../js/product-detail.js"></script>
+    <script src="../js/recently-viewed.js"></script>
+    <script src="../js/related-products.js"></script>
+    <script src="../js/notifications.js"></script>
+    <script src="../js/cart.js"></script>
+    <script src="../js/wishlist.js"></script>
+    <script src="../js/search.js"></script>
+    <script src="../js/filter.js"></script>
+    <script src="../js/category-pages.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            loadCategory('tees', 'tees');
+        });
+    </script>
+</body>
+</html>
