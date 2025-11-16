@@ -78,7 +78,7 @@
             margin-bottom: 24px;
         }
 
-        /* Who We Are Images - FIXED */
+        /* Who We Are Images */
         .mission-images {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -172,7 +172,7 @@
             color: #666;
         }
 
-        /* Team Section - FIXED */
+        /* Team Section */
         .team-section {
             padding: 100px 0;
             background: #fff;
@@ -482,7 +482,7 @@
     <div class="promo-bar">
         <div class="promo-content">
             FREE SHIPPING ON ORDERS OVER ₱5,000 • SHOP NEW ARRIVALS
-            <button class="promo-close" onclick="closePromo()"><i class="fas fa-times"></i></button>
+            <button class="promo-close" onclick="this.parentElement.parentElement.style.display='none'"><i class="fas fa-times"></i></button>
         </div>
     </div>
 
@@ -516,7 +516,7 @@
             </div>
             <div class="ms-auto d-flex gap-3 align-items-center navbar-icons">
                 <div class="search-bar-custom">
-                    <input type="text" id="searchInput" placeholder="Search products..." onkeyup="liveSearch()">
+                    <input type="text" id="searchInput" placeholder="Search products...">
                     <i class="fas fa-search"></i>
                 </div>
                 <button class="icon-btn-custom" onclick="openWishlist()" title="Wishlist">
@@ -548,22 +548,18 @@
                 <p>As IT students, we bring a unique perspective to the streetwear industry—combining our technical expertise with creative design to build not just clothing, but a complete digital experience. Every piece we create is designed with purpose, crafted with quality, and inspired by the vibrant energy of Cebu's urban culture.</p>
                 <p>Our mission is simple: deliver premium streetwear that empowers young creatives to express themselves authentically, while building a brand that showcases what Filipino IT students can achieve when passion meets innovation.</p>
                 
-                <!-- Image Placeholders - Add your images here -->
                 <div class="mission-images">
                     <div class="mission-image">
-                        <!-- Option 1: With image (remove the <i> tag when you add image) -->
-                        <img src="../images/pic1.jpg" alt="Team working"> 
-                        
-                        <!-- Option 2: Placeholder icon (remove when you add image) -->
-                        <i class="fas fa-image"></i>
+                        <img src="../images/pic1.jpg" alt="Team working" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';"> 
+                        <i class="fas fa-image" style="display:none;"></i>
                     </div>
                     <div class="mission-image">
-                        <i class="fas fa-image"></i>
-                        <img src="../images/pic2.jpg" alt="Design process"> 
+                        <img src="../images/pic2.jpg" alt="Design process" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';"> 
+                        <i class="fas fa-image" style="display:none;"></i>
                     </div>
                     <div class="mission-image">
-                        <i class="fas fa-image"></i>
-                         <img src="../images/pic3.jpg" alt="Products">
+                        <img src="../images/pic3.jpg" alt="Products" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                        <i class="fas fa-image" style="display:none;"></i>
                     </div>
                 </div>
             </div>
@@ -688,52 +684,46 @@
             <h2 class="section-title-center">Meet The Founders</h2>
             <p style="text-align: center; max-width: 700px; margin: 0 auto 48px; color: #666; font-size: 16px;">Five IT students from Cebu who turned a class project into a streetwear brand. Still balancing code, classes, and clothing.</p>
             <div class="team-grid">
-                <!-- Team Member 1 -->
                 <div class="team-member">
                     <div class="team-photo">
-                        <img src="../images/glen.webp" alt="Glen Rivera"> 
-                        <!-- Remove <i> tag below when you add image -->
-                       
+                        <img src="../images/glen.webp" alt="Glen Rivera" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';"> 
+                        <i class="fas fa-user" style="display:none;"></i>
                     </div>
                     <h4>Glen Rivera</h4>
                     <p>Founder & CEO</p>
                 </div>
 
-                <!-- Team Member 2 -->
                 <div class="team-member">
                     <div class="team-photo">
-                        <!-- To add image: <img src="../images/james.jpg" alt="James Pasumala"> -->
+                          <img src="../images/james.png" alt="Kirk Cimafranca" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';"> 
                         <i class="fas fa-user"></i>
                     </div>
                     <h4>James Pasumala</h4>
                     <p>Creative Director</p>
                 </div>
 
-                <!-- Team Member 3 -->
                 <div class="team-member">
                     <div class="team-photo">
-                         <img src="../images/kirk.jpg" alt="Kirk Cimafranca"> 
-                        
+                        <img src="../images/kirk.jpg" alt="Kirk Cimafranca" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';"> 
+                        <i class="fas fa-user" style="display:none;"></i>
                     </div>
                     <h4>Kirk Cimafranca</h4>
                     <p>Tech Lead</p>
                 </div>
 
-                <!-- Team Member 4 -->
                 <div class="team-member">
                     <div class="team-photo">
-                     <img src="../images/yul.jpg" alt="Rheaniele Abad"> 
-                      
+                        <img src="../images/yul.jpg" alt="Rheaniele Abad" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';"> 
+                        <i class="fas fa-user" style="display:none;"></i>
                     </div>
                     <h4>Rheaniele Abad</h4>
                     <p>Marketing Head</p>
                 </div>
 
-                <!-- Team Member 5 -->
                 <div class="team-member">
                     <div class="team-photo">
-                        <img src="../images/leanne.jpg" alt="Leanne Cuevas"> 
-                       
+                        <img src="../images/leanne.jpg" alt="Leanne Cuevas" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';"> 
+                        <i class="fas fa-user" style="display:none;"></i>
                     </div>
                     <h4>Leanne Cuevas</h4>
                     <p>Design Lead</p>
@@ -843,23 +833,121 @@
         <div class="cart-items" id="cartItems">
             <p class="empty-cart">Your cart is empty</p>
         </div>
-     <div class="sidebar-backdrop" id="backdrop" onclick="closeAllSidebars()"></div>
+        <div class="cart-footer">
+            <div class="cart-total">
+                <strong>Total:</strong>
+                <span id="cartTotal">₱0.00</span>
+            </div>
+            <button class="btn-checkout" onclick="checkout()">Checkout</button>
+            <button class="btn-continue" onclick="toggleCart()">Continue Shopping</button>
+        </div>
+    </div>
 
+    <!-- Wishlist Sidebar -->
+    <div class="wishlist-sidebar" id="wishlistSidebar">
+        <div class="wishlist-header">
+            <h4>Wishlist</h4>
+            <button onclick="closeAllSidebars()" class="close-btn"><i class="fas fa-times"></i></button>
+        </div>
+        <div class="wishlist-items" id="wishlistItems">
+            <p class="empty-wishlist">Your wishlist is empty</p>
+        </div>
+    </div>
+
+    <div class="toast-notification" id="notification"></div>
+    <div class="sidebar-backdrop" id="backdrop" onclick="closeAllSidebars()"></div>
+
+    <!-- Scripts - COMPLETE SET -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
     <script src="../js/products.js"></script>
-    <script src="../js/product-detail.js"></script>
-    <script src="../js/recently-viewed.js"></script>
-    <script src="../js/related-products.js"></script>
     <script src="../js/notifications.js"></script>
     <script src="../js/cart.js"></script>
     <script src="../js/wishlist.js"></script>
-    <script src="../js/wishlist-buttons.js"></script>  
+    <script src="../js/wishlist-buttons.js"></script>
+    <script src="../js/ui-interactions.js"></script>
     <script src="../js/search.js"></script>
-    <script src="../js/filter.js"></script>
-    <script src="../js/category-pages.js"></script>
+    
     <script>
+        // Helper functions for Our Story page
+        function closePromo() {
+            const promo = document.querySelector('.promo-bar');
+            if (promo) promo.style.display = 'none';
+        }
+
+        function subscribeNewsletter() {
+            const input = document.getElementById('emailInput');
+            const email = input?.value.trim();
+            
+            if (email && email.includes('@')) {
+                if (typeof showNotification === 'function') {
+                    showNotification('Thanks for subscribing!', 'success');
+                } else {
+                    alert('Thanks for subscribing!');
+                }
+                if (input) input.value = '';
+            } else {
+                if (typeof showNotification === 'function') {
+                    showNotification('Please enter a valid email', 'error');
+                } else {
+                    alert('Please enter a valid email');
+                }
+            }
+        }
+
+        function closeAllSidebars() {
+            const cart = document.getElementById('cartSidebar');
+            const wishlist = document.getElementById('wishlistSidebar');
+            const backdrop = document.getElementById('backdrop');
+            
+            if (cart) cart.classList.remove('active');
+            if (wishlist) wishlist.classList.remove('active');
+            if (backdrop) backdrop.classList.remove('active');
+            
+            document.body.style.overflow = '';
+        }
+
+        function toggleCart() {
+            const cartSidebar = document.getElementById('cartSidebar');
+            const backdrop = document.getElementById('backdrop');
+            if (!cartSidebar || !backdrop) return;
+            
+            cartSidebar.classList.toggle('active');
+            backdrop.classList.toggle('active');
+            
+            if (cartSidebar.classList.contains('active')) {
+                document.body.style.overflow = 'hidden';
+                if (typeof renderCart === 'function') renderCart();
+            } else {
+                document.body.style.overflow = '';
+            }
+        }
+
+        function openWishlist() {
+            if (typeof window.goToPagesPage === 'function') {
+                window.goToPagesPage('wishlist.html');
+            } else {
+                window.location.href = 'wishlist.html';
+            }
+        }
+
+        function checkout() {
+            if (typeof window.goToPagesPage === 'function') {
+                window.goToPagesPage('cart.html');
+            } else {
+                window.location.href = 'cart.html';
+            }
+        }
+
+        // Initialize on page load
         document.addEventListener('DOMContentLoaded', function() {
-            loadCategory('pants', 'pants'); // ✅ FIXED - LOADS PANTS CATEGORY
+            // Initialize cart and wishlist
+            if (typeof initCart === 'function') initCart();
+            if (typeof initWishlist === 'function') initWishlist();
+            
+            // Close sidebars on Escape key
+            document.addEventListener('keydown', function(event) { 
+                if (event.key === 'Escape') closeAllSidebars(); 
+            });
         });
     </script>
 </body>

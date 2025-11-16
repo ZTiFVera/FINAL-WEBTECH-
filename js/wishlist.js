@@ -1,5 +1,5 @@
  // ============================================
-// wishlist.js - Wishlist Management System
+// wishlist.js - FIXED VERSION - Persistent Wishlist
 // Load after: products.js, notifications.js, cart.js
 // ============================================
 
@@ -41,6 +41,7 @@
     const saved = localStorage.getItem('nestarGazeWishlist');
     try {
       window.wishlistItems = saved ? JSON.parse(saved) : [];
+      console.log('✅ Wishlist initialized:', window.wishlistItems.length, 'items');
     } catch (e) {
       console.error('Failed to parse wishlist:', e);
       window.wishlistItems = [];
@@ -49,16 +50,26 @@
     window.updateWishlistCount();
     window.renderSidebarWishlist();
     window.renderWishlistPage();
-    console.log('✅ Wishlist initialized:', window.wishlistItems.length, 'items');
+    
+    // Update all wishlist button states after init
+    setTimeout(() => {
+      if (typeof window.updateWishlistButtons === 'function') {
+        window.updateWishlistButtons();
+      }
+    }, 100);
   };
 
   window.saveWishlist = function() {
     localStorage.setItem('nestarGazeWishlist', JSON.stringify(window.wishlistItems || []));
+    console.log('💾 Wishlist saved:', window.wishlistItems.length, 'items');
   };
 
   window.toggleWishlist = function(productId) {
     const id = Number(productId);
-    if (Number.isNaN(id)) return;
+    if (Number.isNaN(id)) {
+      console.error('Invalid product ID:', productId);
+      return;
+    }
     
     if (!window.products) {
       console.error('Products array not found');
@@ -69,8 +80,10 @@
     
     if (idx >= 0) {
       // Remove from wishlist
+      const item = window.wishlistItems[idx];
       window.wishlistItems.splice(idx, 1);
-      showNotification('Removed from wishlist', 'success');
+      showNotification(`Removed "${item.name}" from wishlist`, 'success');
+      console.log('❌ Removed from wishlist:', item.name);
     } else {
       // Add to wishlist
       const product = window.products.find(p => p.id === id);
@@ -80,8 +93,11 @@
           img: product.img || product.image
         });
         showNotification(`"${product.name}" added to wishlist`, 'success');
+        console.log('✅ Added to wishlist:', product.name);
       } else {
         showNotification('Product not found', 'error');
+        console.error('Product not found:', id);
+        return;
       }
     }
     
@@ -100,6 +116,7 @@
     const id = Number(productId);
     if (Number.isNaN(id)) return;
     
+    const item = window.wishlistItems.find(i => i.id === id);
     window.wishlistItems = (window.wishlistItems || []).filter(i => i.id !== id);
     window.saveWishlist();
     window.updateWishlistCount();
@@ -110,7 +127,9 @@
       window.updateWishlistButtons();
     }
     
-    showNotification('Removed from wishlist', 'success');
+    if (item) {
+      showNotification(`Removed "${item.name}" from wishlist`, 'success');
+    }
   };
 
   window.addToCartFromWishlist = function(productId) {
@@ -128,7 +147,7 @@
     
     if (typeof addToCart === 'function') {
       addToCart(id, 1, size, color);
-      showNotification('Added to bag', 'success');
+      showNotification(`Added "${p.name}" to bag`, 'success');
     } else {
       showNotification('Add to cart not available', 'error');
     }
@@ -277,36 +296,49 @@
   };
 
   // ============================================
-  // EVENT HANDLERS
+  // EVENT HANDLERS - FIXED WITH PROPER DELEGATION
   // ============================================
 
-  // Delegated click handler for wishlist buttons
- document.removeEventListener('click', handleWishlistClick);
+  let wishlistHandlerAttached = false;
 
-function handleWishlistClick(e) {
+  function handleWishlistClick(e) {
     const btn = e.target.closest('.product-wishlist-btn');
     if (btn) {
-        // ✅ CRITICAL: Stop the click from bubbling to parent elements
-        e.preventDefault();
-        e.stopPropagation();
-        e.stopImmediatePropagation();
-        
-        let pid = btn.getAttribute('data-product-id') || btn.dataset.productId;
-        if (!pid) {
-            const parent = btn.closest('[data-product-id]');
-            if (parent) pid = parent.getAttribute('data-product-id');
-        }
-        
-        if (pid) {
-            window.toggleWishlist(parseInt(pid, 10));
-        }
-        
-        return false; // Extra safety
+      e.preventDefault();
+      e.stopPropagation();
+      e.stopImmediatePropagation();
+      
+      let pid = btn.getAttribute('data-product-id') || btn.dataset.productId;
+      if (!pid) {
+        const parent = btn.closest('[data-product-id]');
+        if (parent) pid = parent.getAttribute('data-product-id');
+      }
+      
+      if (pid) {
+        window.toggleWishlist(parseInt(pid, 10));
+      }
+      
+      return false;
     }
-}
+  }
 
-// Add the event listener with capture phase for earlier interception
-document.addEventListener('click', handleWishlistClick, true);
+  // Attach event listener ONLY ONCE
+  if (!wishlistHandlerAttached) {
+    document.addEventListener('click', handleWishlistClick, true);
+    wishlistHandlerAttached = true;
+    console.log('✅ Wishlist click handler attached');
+  }
 
-console.log('✅ Wishlist click handler updated with propagation prevention');
+  // ============================================
+  // INITIALIZATION
+  // ============================================
+
+  // Auto-initialize on DOM ready
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', window.initWishlist);
+  } else {
+    window.initWishlist();
+  }
+
+  console.log('✅ Wishlist system loaded');
 })();
