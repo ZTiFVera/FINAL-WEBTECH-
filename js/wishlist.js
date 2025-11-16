@@ -281,28 +281,32 @@
   // ============================================
 
   // Delegated click handler for wishlist buttons
-  document.addEventListener('click', function (e) {
+ document.removeEventListener('click', handleWishlistClick);
+
+function handleWishlistClick(e) {
     const btn = e.target.closest('.product-wishlist-btn');
     if (btn) {
-      e.preventDefault();
-      e.stopPropagation();
-      
-      let pid = btn.getAttribute('data-product-id') || btn.dataset.productId;
-      if (!pid) {
-        const parent = btn.closest('[data-product-id]');
-        if (parent) pid = parent.getAttribute('data-product-id');
-      }
-      
-      if (pid) {
-        window.toggleWishlist(parseInt(pid, 10));
-      }
+        // ✅ CRITICAL: Stop the click from bubbling to parent elements
+        e.preventDefault();
+        e.stopPropagation();
+        e.stopImmediatePropagation();
+        
+        let pid = btn.getAttribute('data-product-id') || btn.dataset.productId;
+        if (!pid) {
+            const parent = btn.closest('[data-product-id]');
+            if (parent) pid = parent.getAttribute('data-product-id');
+        }
+        
+        if (pid) {
+            window.toggleWishlist(parseInt(pid, 10));
+        }
+        
+        return false; // Extra safety
     }
-  });
+}
 
-  // Initialize on page load
-  document.addEventListener('DOMContentLoaded', function() {
-    window.initWishlist();
-  });
+// Add the event listener with capture phase for earlier interception
+document.addEventListener('click', handleWishlistClick, true);
 
-  console.log('✅ Wishlist system loaded');
+console.log('✅ Wishlist click handler updated with propagation prevention');
 })();

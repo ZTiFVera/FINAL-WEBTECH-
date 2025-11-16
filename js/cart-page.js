@@ -26,16 +26,38 @@ function formatPrice(value) {
 // ============================================
 
 function renderCartPage() {
+    console.log('🛒 renderCartPage called');
+    console.log('Cart items:', window.cartItems);
+    
     const container = document.getElementById('cartItemsPage');
     const summary = document.getElementById('cartSummaryPage');
     
     if (!container || !summary) {
-        console.warn('Cart page containers not found');
+        console.error('❌ Cart page containers not found!');
         return;
     }
 
+    // Get cart items from window or localStorage
+    let items = window.cartItems || [];
+    
+    // If window.cartItems is empty, try to load from localStorage
+    if (items.length === 0) {
+        const saved = localStorage.getItem('nestarGazeCart');
+        if (saved) {
+            try {
+                items = JSON.parse(saved);
+                window.cartItems = items;
+                console.log('✅ Loaded cart from localStorage:', items);
+            } catch (e) {
+                console.error('❌ Error parsing cart from localStorage:', e);
+                items = [];
+            }
+        }
+    }
+
     // Check if cart is empty
-    if (!window.cartItems || window.cartItems.length === 0) {
+    if (!items || items.length === 0) {
+        console.log('📭 Cart is empty');
         container.innerHTML = `
             <div class="empty-cart-page">
                 <div class="empty-cart-icon">
@@ -57,14 +79,16 @@ function renderCartPage() {
         return;
     }
 
+    console.log('✅ Rendering', items.length, 'cart items');
+
     // Render cart items
     container.innerHTML = `
         <div class="cart-items-header">
-            <h2>Shopping Bag (${window.cartItems.length} ${window.cartItems.length === 1 ? 'Item' : 'Items'})</h2>
+            <h2>Shopping Bag (${items.length} ${items.length === 1 ? 'Item' : 'Items'})</h2>
         </div>
         
         <div class="cart-items-list">
-            ${window.cartItems.map(item => {
+            ${items.map(item => {
                 const imgPath = getCorrectImagePath(item.img || item.image);
                 const itemTotal = item.price * item.quantity;
                 
@@ -90,11 +114,11 @@ function renderCartPage() {
                             <div class="item-attributes">
                                 <div class="attribute">
                                     <span class="label">Size:</span>
-                                    <span class="value">${item.size}</span>
+                                    <span class="value">${item.size || 'M'}</span>
                                 </div>
                                 <div class="attribute">
                                     <span class="label">Color:</span>
-                                    <span class="value">${item.color}</span>
+                                    <span class="value">${item.color || 'Black'}</span>
                                 </div>
                             </div>
                             
@@ -139,10 +163,12 @@ function renderCartPage() {
     `;
 
     // Calculate totals
-    const subtotal = window.cartItems.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+    const subtotal = items.reduce((sum, item) => sum + (item.price * item.quantity), 0);
     const shipping = subtotal >= 5000 ? 0 : 150;
     const tax = Math.round(subtotal * 0.12); // 12% tax
     const total = subtotal + shipping + tax;
+
+    console.log('💰 Totals - Subtotal:', subtotal, 'Shipping:', shipping, 'Tax:', tax, 'Total:', total);
 
     // Render order summary
     summary.innerHTML = `
@@ -151,7 +177,7 @@ function renderCartPage() {
             
             <div class="summary-details">
                 <div class="summary-row">
-                    <span>Subtotal (${window.cartItems.length} items)</span>
+                    <span>Subtotal (${items.length} items)</span>
                     <span>${formatPrice(subtotal)}</span>
                 </div>
                 
@@ -209,6 +235,8 @@ function renderCartPage() {
             </a>
         </div>
     `;
+    
+    console.log('✅ Cart page rendered successfully');
 }
 
 // ============================================
@@ -216,28 +244,36 @@ function renderCartPage() {
 // ============================================
 
 function changeQtyFromPage(cartItemId, newQty) {
+    console.log('Changing qty for:', cartItemId, 'to:', newQty);
     if (typeof window.updateCartQuantity === 'function') {
         window.updateCartQuantity(cartItemId, parseInt(newQty));
         renderCartPage();
+    } else {
+        console.error('updateCartQuantity function not available');
     }
 }
 
 function removeFromCartFromPage(cartItemId) {
     if (confirm('Remove this item from your bag?')) {
+        console.log('Removing item:', cartItemId);
         if (typeof window.removeFromCart === 'function') {
             window.removeFromCart(cartItemId);
             renderCartPage();
+        } else {
+            console.error('removeFromCart function not available');
         }
     }
 }
 
 function moveToWishlistFromCart(cartItemId, productId) {
+    console.log('Moving to wishlist:', cartItemId, productId);
+    
     // Add to wishlist
     if (typeof window.toggleWishlist === 'function') {
         const item = window.cartItems.find(i => String(i.cartItemId) === String(cartItemId));
         if (item) {
             // Check if already in wishlist
-            const isInWishlist = window.wishlistItems.some(w => w.id === productId);
+            const isInWishlist = window.wishlistItems && window.wishlistItems.some(w => w.id === productId);
             if (!isInWishlist) {
                 window.toggleWishlist(productId);
             }
@@ -245,15 +281,21 @@ function moveToWishlistFromCart(cartItemId, productId) {
             if (typeof window.removeFromCart === 'function') {
                 window.removeFromCart(cartItemId);
                 renderCartPage();
-                showNotification('Item moved to wishlist', 'success');
+                if (typeof showNotification === 'function') {
+                    showNotification('Item moved to wishlist', 'success');
+                }
             }
         }
+    } else {
+        console.error('toggleWishlist function not available');
     }
 }
 
 function proceedToCheckout() {
     if (!window.cartItems || window.cartItems.length === 0) {
-        showNotification('Your cart is empty', 'error');
+        if (typeof showNotification === 'function') {
+            showNotification('Your cart is empty', 'error');
+        }
         return;
     }
     
@@ -262,7 +304,9 @@ function proceedToCheckout() {
     const tax = Math.round(subtotal * 0.12);
     const total = subtotal + shipping + tax;
     
-    showNotification(`Proceeding to checkout - Total: ${formatPrice(total)}`, 'success');
+    if (typeof showNotification === 'function') {
+        showNotification(`Proceeding to checkout - Total: ${formatPrice(total)}`, 'success');
+    }
     
     // In a real app, this would navigate to checkout
     setTimeout(() => {
@@ -282,3 +326,18 @@ window.moveToWishlistFromCart = moveToWishlistFromCart;
 window.proceedToCheckout = proceedToCheckout;
 
 console.log('✅ Cart page system loaded');
+
+// Auto-render if on cart page
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', function() {
+        if (document.getElementById('cartItemsPage')) {
+            console.log('🔄 Auto-rendering cart page on DOMContentLoaded');
+            setTimeout(renderCartPage, 100);
+        }
+    });
+} else {
+    if (document.getElementById('cartItemsPage')) {
+        console.log('🔄 Auto-rendering cart page immediately');
+        setTimeout(renderCartPage, 100);
+    }
+}

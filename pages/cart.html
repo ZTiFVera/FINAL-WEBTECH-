@@ -11,558 +11,120 @@
   <link rel="stylesheet" href="../css/responsive.css">
 
   <style>
-/* ============================================
-   CART PAGE STYLES - PacSun Inspired
-   ============================================ */
-
-.bag-container {
-    padding: 40px 0 80px;
-    min-height: 60vh;
-}
-
-.bag-grid {
-    display: grid;
-    grid-template-columns: 1fr 420px;
-    gap: 48px;
-    align-items: start;
-}
-
-/* EMPTY CART STATE */
-.empty-cart-page {
-    text-align: center;
-    padding: 80px 20px;
-    background: #fff;
-    border-radius: 8px;
-    border: 1px solid var(--border-gray);
-}
-
-.empty-cart-icon {
-    font-size: 80px;
-    color: var(--border-gray);
-    margin-bottom: 24px;
-}
-
-.empty-cart-page h2 {
-    font-size: 28px;
-    font-weight: 800;
-    margin-bottom: 12px;
-    color: var(--primary-dark);
-}
-
-.empty-cart-page p {
-    color: var(--text-gray);
-    margin-bottom: 32px;
-    font-size: 16px;
-}
-
-.btn-shop-now {
-    display: inline-block;
-    padding: 14px 32px;
-    background: var(--primary-dark);
-    color: #fff;
-    text-decoration: none;
-    font-weight: 700;
-    font-size: 14px;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    border-radius: 4px;
-    transition: all 0.3s;
-}
-
-.btn-shop-now:hover {
-    background: var(--secondary-dark);
-    transform: translateY(-2px);
-    box-shadow: 0 6px 16px rgba(0,0,0,0.2);
-    color: #fff;
-}
-
-/* CART ITEMS SECTION */
-.bag-items {
-    background: #fff;
-}
-
-.cart-items-header {
-    padding-bottom: 20px;
-    border-bottom: 2px solid var(--border-gray);
-    margin-bottom: 24px;
-}
-
-.cart-items-header h2 {
-    font-size: 24px;
-    font-weight: 800;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    color: var(--primary-dark);
-}
-
-.cart-items-list {
-    display: flex;
-    flex-direction: column;
-    gap: 24px;
-}
-
-/* CART ITEM CARD */
-.cart-page-item {
-    display: grid;
-    grid-template-columns: 140px 1fr auto;
-    gap: 20px;
-    padding: 24px;
-    background: #fff;
-    border: 1px solid var(--border-gray);
-    border-radius: 8px;
-    transition: all 0.3s;
-}
-
-.cart-page-item:hover {
-    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-}
-
-.cart-page-item-image {
-    width: 140px;
-    height: 180px;
-    border-radius: 6px;
-    overflow: hidden;
-    background: var(--light-gray);
-    flex-shrink: 0;
-}
-
-.cart-page-item-image img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 0.3s;
-}
-
-.cart-page-item:hover .cart-page-item-image img {
-    transform: scale(1.05);
-}
-
-.cart-page-item-details {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    min-width: 0;
-}
-
-.item-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-}
-
-.item-brand {
-    font-size: 12px;
-    font-weight: 700;
-    text-transform: uppercase;
-    color: var(--text-gray);
-    letter-spacing: 1px;
-    margin-bottom: 4px;
-}
-
-.item-name {
-    font-size: 16px;
-    font-weight: 700;
-    color: var(--primary-dark);
-    line-height: 1.3;
-    margin-bottom: 0;
-}
-
-.item-price-mobile {
-    display: none;
-}
-
-.item-attributes {
-    display: flex;
-    gap: 16px;
-    flex-wrap: wrap;
-}
-
-.attribute {
-    display: flex;
-    gap: 6px;
-    font-size: 14px;
-}
-
-.attribute .label {
-    color: var(--text-gray);
-    font-weight: 600;
-}
-
-.attribute .value {
-    color: var(--primary-dark);
-    font-weight: 700;
-}
-
-.item-price-desktop {
-    display: flex;
-    gap: 12px;
-    align-items: baseline;
-}
-
-.unit-price {
-    font-size: 14px;
-    color: var(--text-gray);
-}
-
-.old-price {
-    font-size: 14px;
-    text-decoration: line-through;
-    color: #d32f2f;
-}
-
-.item-actions {
-    display: flex;
-    gap: 16px;
-    align-items: center;
-    flex-wrap: wrap;
-}
-
-.quantity-selector-cart {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-}
-
-.quantity-selector-cart label {
-    font-size: 13px;
-    font-weight: 700;
-    text-transform: uppercase;
-    color: var(--primary-dark);
-    margin: 0;
-}
-
-.quantity-selector-cart select {
-    padding: 8px 12px;
-    border: 1px solid var(--border-gray);
-    border-radius: 4px;
-    font-size: 14px;
-    font-weight: 600;
-    background: #fff;
-    cursor: pointer;
-    transition: border-color 0.2s;
-}
-
-.quantity-selector-cart select:hover {
-    border-color: var(--primary-dark);
-}
-
-.btn-move-wishlist,
-.btn-remove-item {
-    background: none;
-    border: none;
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    font-size: 13px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.2s;
-    padding: 6px 12px;
-    border-radius: 4px;
-}
-
-.btn-move-wishlist {
-    color: var(--primary-dark);
-}
-
-.btn-move-wishlist:hover {
-    background: var(--light-gray);
-    color: #d32f2f;
-}
-
-.btn-remove-item {
-    color: #999;
-}
-
-.btn-remove-item:hover {
-    background: #fee;
-    color: #d32f2f;
-}
-
-.cart-page-item-total {
-    font-size: 20px;
-    font-weight: 800;
-    color: var(--primary-dark);
-    text-align: right;
-}
-
-/* ORDER SUMMARY */
-.bag-summary {
-    position: sticky;
-    top: 100px;
-}
-
-.order-summary-sticky {
-    background: #fff;
-    border: 1px solid var(--border-gray);
-    border-radius: 8px;
-    padding: 24px;
-}
-
-.summary-title {
-    font-size: 20px;
-    font-weight: 800;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    margin-bottom: 24px;
-    color: var(--primary-dark);
-}
-
-.summary-details {
-    margin-bottom: 24px;
-}
-
-.summary-row {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 16px;
-    font-size: 15px;
-}
-
-.summary-row span:first-child {
-    color: var(--text-gray);
-}
-
-.summary-row span:last-child {
-    font-weight: 700;
-    color: var(--primary-dark);
-}
-
-.free-shipping {
-    color: #4caf50 !important;
-    font-weight: 800 !important;
-}
-
-.shipping-progress {
-    margin: 20px 0;
-    padding: 16px;
-    background: var(--light-gray);
-    border-radius: 6px;
-}
-
-.progress-bar-container {
-    width: 100%;
-    height: 8px;
-    background: #e0e0e0;
-    border-radius: 4px;
-    overflow: hidden;
-    margin-bottom: 12px;
-}
-
-.progress-bar-fill {
-    height: 100%;
-    background: linear-gradient(90deg, #4caf50, #66bb6a);
-    transition: width 0.3s;
-}
-
-.progress-text {
-    font-size: 13px;
-    color: var(--primary-dark);
-    margin: 0;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-}
-
-.progress-text i {
-    color: #4caf50;
-}
-
-.free-shipping-achieved {
-    margin: 20px 0;
-    padding: 16px;
-    background: #e8f5e9;
-    border-radius: 6px;
-    color: #2e7d32;
-    font-weight: 700;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-}
-
-.summary-total {
-    display: flex;
-    justify-content: space-between;
-    padding-top: 24px;
-    border-top: 2px solid var(--border-gray);
-    margin-bottom: 24px;
-    font-size: 18px;
-}
-
-.total-amount {
-    font-size: 24px;
-    font-weight: 900;
-    color: var(--primary-dark);
-}
-
-.btn-checkout-full {
-    width: 100%;
-    padding: 18px;
-    background: var(--primary-dark);
-    color: #fff;
-    border: none;
-    font-size: 15px;
-    font-weight: 800;
-    text-transform: uppercase;
-    letter-spacing: 0.8px;
-    cursor: pointer;
-    border-radius: 4px;
-    transition: all 0.3s;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    margin-bottom: 20px;
-}
-
-.btn-checkout-full:hover {
-    background: var(--secondary-dark);
-    transform: translateY(-2px);
-    box-shadow: 0 8px 20px rgba(0,0,0,0.25);
-}
-
-.accepted-payments {
-    text-align: center;
-    margin-bottom: 20px;
-    padding-top: 20px;
-    border-top: 1px solid var(--border-gray);
-}
-
-.accepted-payments p {
-    font-size: 12px;
-    color: var(--text-gray);
-    margin-bottom: 12px;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    font-weight: 600;
-}
-
-.payment-icons {
-    display: flex;
-    justify-content: center;
-    gap: 12px;
-}
-
-.payment-icons i {
-    font-size: 32px;
-    color: var(--text-gray);
-    transition: color 0.2s;
-}
-
-.payment-icons i:hover {
-    color: var(--primary-dark);
-}
-
-.continue-shopping {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    color: var(--primary-dark);
-    text-decoration: none;
-    font-weight: 700;
-    font-size: 14px;
-    transition: all 0.2s;
-    padding: 12px;
-    border-radius: 4px;
-}
-
-.continue-shopping:hover {
-    background: var(--light-gray);
-    color: var(--primary-dark);
-}
-
-.summary-empty {
-    text-align: center;
-    padding: 40px 20px;
-    color: var(--text-gray);
-}
-
-/* RESPONSIVE */
+/* Cart Page Styles */
+.bag-container { padding: 40px 0 80px; min-height: 60vh; }
+.bag-grid { display: grid; grid-template-columns: 1fr 420px; gap: 48px; align-items: start; }
+
+/* Empty State */
+.empty-cart-page { text-align: center; padding: 80px 20px; background: #fff; border-radius: 8px; border: 1px solid var(--border-gray); }
+.empty-cart-icon { font-size: 80px; color: var(--border-gray); margin-bottom: 24px; }
+.empty-cart-page h2 { font-size: 28px; font-weight: 800; margin-bottom: 12px; color: var(--primary-dark); }
+.empty-cart-page p { color: var(--text-gray); margin-bottom: 32px; font-size: 16px; }
+.btn-shop-now { display: inline-block; padding: 14px 32px; background: var(--primary-dark); color: #fff; text-decoration: none; font-weight: 700; font-size: 14px; text-transform: uppercase; letter-spacing: 0.5px; border-radius: 4px; transition: all 0.3s; }
+.btn-shop-now:hover { background: var(--secondary-dark); transform: translateY(-2px); box-shadow: 0 6px 16px rgba(0,0,0,0.2); color: #fff; }
+
+/* Items List */
+.bag-items { background: #fff; }
+.cart-items-header { padding-bottom: 20px; border-bottom: 2px solid var(--border-gray); margin-bottom: 24px; }
+.cart-items-header h2 { font-size: 24px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px; color: var(--primary-dark); }
+.cart-items-list { display: flex; flex-direction: column; gap: 24px; }
+
+/* Cart Item Card */
+.cart-page-item { display: grid; grid-template-columns: 120px 1fr auto; gap: 20px; padding: 20px; background: #fff; border: 1px solid var(--border-gray); border-radius: 8px; transition: all 0.3s; }
+.cart-page-item:hover { box-shadow: 0 4px 12px rgba(0,0,0,0.08); }
+.cart-page-item-image { width: 120px; height: 160px; border-radius: 6px; overflow: hidden; background: var(--light-gray); flex-shrink: 0; }
+.cart-page-item-image img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.3s; }
+.cart-page-item:hover .cart-page-item-image img { transform: scale(1.05); }
+
+.cart-page-item-details { display: flex; flex-direction: column; gap: 12px; min-width: 0; }
+.item-header { display: flex; justify-content: space-between; align-items: flex-start; }
+.item-brand { font-size: 11px; font-weight: 700; text-transform: uppercase; color: var(--text-gray); letter-spacing: 1px; margin-bottom: 4px; }
+.item-name { font-size: 15px; font-weight: 700; color: var(--primary-dark); line-height: 1.3; margin-bottom: 0; }
+.item-price-mobile { display: none; }
+
+.item-attributes { display: flex; gap: 16px; flex-wrap: wrap; }
+.attribute { display: flex; gap: 6px; font-size: 13px; }
+.attribute .label { color: var(--text-gray); font-weight: 600; }
+.attribute .value { color: var(--primary-dark); font-weight: 700; }
+
+.item-price-desktop { display: flex; gap: 12px; align-items: baseline; }
+.unit-price { font-size: 13px; color: var(--text-gray); }
+.old-price { font-size: 13px; text-decoration: line-through; color: #d32f2f; }
+
+.item-actions { display: flex; gap: 16px; align-items: center; flex-wrap: wrap; }
+.quantity-selector-cart { display: flex; align-items: center; gap: 8px; }
+.quantity-selector-cart label { font-size: 12px; font-weight: 700; text-transform: uppercase; color: var(--primary-dark); margin: 0; }
+.quantity-selector-cart select { padding: 8px 12px; border: 1px solid var(--border-gray); border-radius: 4px; font-size: 13px; font-weight: 600; background: #fff; cursor: pointer; transition: border-color 0.2s; }
+.quantity-selector-cart select:hover { border-color: var(--primary-dark); }
+
+.btn-move-wishlist, .btn-remove-item { background: none; border: none; display: flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 600; cursor: pointer; transition: all 0.2s; padding: 6px 12px; border-radius: 4px; }
+.btn-move-wishlist { color: var(--primary-dark); }
+.btn-move-wishlist:hover { background: var(--light-gray); color: #d32f2f; }
+.btn-remove-item { color: #999; }
+.btn-remove-item:hover { background: #fee; color: #d32f2f; }
+
+.cart-page-item-total { font-size: 18px; font-weight: 800; color: var(--primary-dark); text-align: right; }
+
+/* Order Summary */
+.bag-summary { position: sticky; top: 100px; }
+.order-summary-sticky { background: #fff; border: 1px solid var(--border-gray); border-radius: 8px; padding: 24px; }
+.summary-title { font-size: 18px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 24px; color: var(--primary-dark); }
+.summary-details { margin-bottom: 24px; }
+.summary-row { display: flex; justify-content: space-between; margin-bottom: 14px; font-size: 14px; }
+.summary-row span:first-child { color: var(--text-gray); }
+.summary-row span:last-child { font-weight: 700; color: var(--primary-dark); }
+.free-shipping { color: #4caf50 !important; font-weight: 800 !important; }
+
+.shipping-progress { margin: 18px 0; padding: 14px; background: var(--light-gray); border-radius: 6px; }
+.progress-bar-container { width: 100%; height: 6px; background: #e0e0e0; border-radius: 3px; overflow: hidden; margin-bottom: 10px; }
+.progress-bar-fill { height: 100%; background: linear-gradient(90deg, #4caf50, #66bb6a); transition: width 0.3s; }
+.progress-text { font-size: 12px; color: var(--primary-dark); margin: 0; display: flex; align-items: center; gap: 6px; }
+.progress-text i { color: #4caf50; }
+.free-shipping-achieved { margin: 18px 0; padding: 14px; background: #e8f5e9; border-radius: 6px; color: #2e7d32; font-weight: 700; display: flex; align-items: center; gap: 8px; font-size: 13px; }
+
+.summary-total { display: flex; justify-content: space-between; padding-top: 20px; border-top: 2px solid var(--border-gray); margin-bottom: 20px; font-size: 16px; }
+.total-amount { font-size: 22px; font-weight: 900; color: var(--primary-dark); }
+
+.btn-checkout-full { width: 100%; padding: 16px; background: var(--primary-dark); color: #fff; border: none; font-size: 14px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.8px; cursor: pointer; border-radius: 4px; transition: all 0.3s; display: flex; align-items: center; justify-content: center; gap: 10px; margin-bottom: 18px; }
+.btn-checkout-full:hover { background: var(--secondary-dark); transform: translateY(-2px); box-shadow: 0 8px 20px rgba(0,0,0,0.25); }
+
+.accepted-payments { text-align: center; margin-bottom: 18px; padding-top: 18px; border-top: 1px solid var(--border-gray); }
+.accepted-payments p { font-size: 11px; color: var(--text-gray); margin-bottom: 10px; text-transform: uppercase; letter-spacing: 0.5px; font-weight: 600; }
+.payment-icons { display: flex; justify-content: center; gap: 10px; }
+.payment-icons i { font-size: 28px; color: var(--text-gray); transition: color 0.2s; }
+.payment-icons i:hover { color: var(--primary-dark); }
+
+.continue-shopping { display: flex; align-items: center; justify-content: center; gap: 8px; color: var(--primary-dark); text-decoration: none; font-weight: 700; font-size: 13px; transition: all 0.2s; padding: 10px; border-radius: 4px; }
+.continue-shopping:hover { background: var(--light-gray); color: var(--primary-dark); }
+
+/* Responsive */
 @media (max-width: 1024px) {
-    .bag-grid {
-        grid-template-columns: 1fr;
-        gap: 32px;
-    }
-    
-    .bag-summary {
-        position: static;
-    }
+    .bag-grid { grid-template-columns: 1fr; gap: 32px; }
+    .bag-summary { position: static; }
 }
 
 @media (max-width: 768px) {
-    .bag-container {
-        padding: 24px 0 48px;
-    }
-    
-    .cart-page-item {
-        grid-template-columns: 100px 1fr;
-        gap: 16px;
-        padding: 16px;
-    }
-    
-    .cart-page-item-image {
-        width: 100px;
-        height: 130px;
-    }
-    
-    .cart-page-item-total {
-        display: none;
-    }
-    
-    .item-price-mobile {
-        display: block;
-        font-size: 18px;
-        font-weight: 800;
-        color: var(--primary-dark);
-    }
-    
-    .item-price-desktop {
-        display: none;
-    }
-    
-    .cart-items-header h2 {
-        font-size: 20px;
-    }
+    .cart-page-item { grid-template-columns: 90px 1fr; gap: 14px; padding: 14px; }
+    .cart-page-item-image { width: 90px; height: 120px; }
+    .cart-page-item-total { display: none; }
+    .item-price-mobile { display: block; font-size: 16px; font-weight: 800; color: var(--primary-dark); }
+    .item-price-desktop { display: none; }
 }
 
 @media (max-width: 480px) {
-    .cart-page-item {
-        grid-template-columns: 1fr;
-    }
-    
-    .cart-page-item-image {
-        width: 100%;
-        height: 250px;
-    }
-    
-    .item-actions {
-        flex-direction: column;
-        align-items: stretch;
-    }
-    
-    .quantity-selector-cart {
-        justify-content: space-between;
-    }
-    
-    .btn-move-wishlist,
-    .btn-remove-item {
-        justify-content: center;
-        padding: 12px;
-    }
+    .cart-page-item { grid-template-columns: 1fr; }
+    .cart-page-item-image { width: 100%; height: 200px; }
 }
   </style>
 </head>
 <body>
-  <!-- Promo Bar -->
   <div class="promo-bar">
     <div class="promo-content">
       FREE SHIPPING ON ORDERS OVER ₱5,000 • SHOP NEW ARRIVALS
-      <button class="promo-close" onclick="closePromo()"><i class="fas fa-times"></i></button>
+      <button class="promo-close" onclick="this.parentElement.parentElement.style.display='none'"><i class="fas fa-times"></i></button>
     </div>
   </div>
 
-  <!-- Navbar -->
   <nav class="navbar navbar-expand-lg navbar-custom">
     <div class="container-lg">
       <a class="navbar-brand navbar-brand-custom" href="../index.html">NESTAR GAZE</a>
@@ -579,7 +141,6 @@
               <li><a class="dropdown-item" href="shop.html">All Products</a></li>
             </ul>
           </li>
-
           <li class="nav-item dropdown">
             <a class="nav-link nav-link-custom dropdown-toggle" href="shop.html" role="button" data-bs-toggle="dropdown">Shop</a>
             <ul class="dropdown-menu">
@@ -589,23 +150,20 @@
               <li><a class="dropdown-item" href="pants.html">Pants</a></li>
             </ul>
           </li>
-
           <li class="nav-item"><a class="nav-link nav-link-custom" href="sale.html">Sale</a></li>
         </ul>
       </div>
 
       <div class="ms-auto d-flex gap-3 align-items-center navbar-icons">
         <div class="search-bar-custom">
-          <input type="text" id="searchInput" placeholder="Search products..." onkeyup="liveSearch()">
+          <input type="text" id="searchInput" placeholder="Search products...">
           <i class="fas fa-search"></i>
         </div>
-
-        <button class="icon-btn-custom" onclick="openWishlist()" title="Wishlist" aria-label="Wishlist">
+        <button class="icon-btn-custom" onclick="window.location.href='wishlist.html'">
           <i class="far fa-heart"></i>
           <span class="badge bg-danger" id="wishlistCount" style="display:none;">0</span>
         </button>
-
-        <button class="icon-btn-custom" onclick="window.location.href='cart.html'" title="Cart" aria-label="Cart">
+        <button class="icon-btn-custom" onclick="window.location.href='cart.html'">
           <i class="fas fa-shopping-bag"></i>
           <span class="cart-badge" id="cartCount">0</span>
         </button>
@@ -613,10 +171,6 @@
     </div>
   </nav>
 
-  <!-- Search Dropdown -->
-  <div class="search-dropdown" id="searchDropdown" style="display:none;"></div>
-
-  <!-- Page Header -->
   <section class="page-header">
     <div class="container-lg">
       <h1>My Bag</h1>
@@ -624,7 +178,6 @@
     </div>
   </section>
 
-  <!-- Cart Page Content -->
   <main class="container-lg bag-container">
     <div class="bag-grid">
       <div class="bag-items" id="cartItemsPage"></div>
@@ -632,131 +185,259 @@
     </div>
   </main>
 
-  <!-- Sidebars -->
-  <div class="cart-sidebar" id="cartSidebar">
-    <div class="cart-header">
-      <h4>Shopping Cart</h4>
-      <button onclick="toggleCart()" class="close-btn"><i class="fas fa-times"></i></button>
-    </div>
-    <div class="cart-items" id="cartItems">
-      <p class="empty-cart">Your cart is empty</p>
-    </div>
-    <div class="cart-footer"></div>
-  </div>
-
-  <div class="wishlist-sidebar" id="wishlistSidebar">
-    <div class="wishlist-header">
-      <h4>Wishlist</h4>
-      <button onclick="closeAllSidebars()" class="close-btn"><i class="fas fa-times"></i></button>
-    </div>
-    <div class="wishlist-items" id="wishlistItems">
-      <p class="empty-wishlist">Your wishlist is empty</p>
-    </div>
-  </div>
-
-  <div class="toast-notification" id="notification"></div>
-  <div class="sidebar-backdrop" id="backdrop" onclick="closeAllSidebars()"></div>
-
-  <!-- Footer -->
-  <footer class="site-footer">
+    <!-- Footer - Corrected Version -->
+<footer>
     <div class="container-lg">
-      <div class="footer-grid">
-        <div class="footer-col">
-          <h5>Get Help</h5>
-          <ul>
-            <li><a href="#">Order Status</a></li>
-            <li><a href="#">Shipping Info</a></li>
-            <li><a href="#">Returns</a></li>
-            <li><a href="#">Contact Us</a></li>
-          </ul>
+        <div class="footer-grid">
+            
+            <div class="footer-col">
+                <h5>GET HELP</h5>
+                <ul>
+                    <li><a href="#">Order Status</a></li>
+                    <li><a href="#">Shipping Info</a></li>
+                    <li><a href="#">Returns</a></li>
+                    <li><a href="#">Contact Us</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h5>ABOUT</h5>
+                <ul>
+                    <li><a href="#">Our Story</a></li>
+                    <li><a href="#">News</a></li>
+                    <li><a href="#">Careers</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h5>SHOP</h5>
+                <ul>
+                    <li><a href="shop.html">All Products</a></li>
+                    <li><a href="hoodies.html">Hoodies</a></li>
+                    <li><a href="tees.html">Graphic Tees</a></li>
+                    <li><a href="sale.html">Sale</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h5>FOLLOW US</h5>
+                <div class="social-icons">
+                    <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                </div>
+
+                <div class="newsletter-signup">
+                    <input type="email" placeholder="Enter your email" id="emailInput">
+                    <button onclick="subscribeNewsletter()" class="btn-subscribe">SUBSCRIBE</button>
+                </div>
+            </div>
+
         </div>
 
-        <div class="footer-col">
-          <h5>About</h5>
-          <ul>
-            <li><a href="#">Our Story</a></li>
-            <li><a href="#">News</a></li>
-            <li><a href="#">Careers</a></li>
-          </ul>
+        <div class="footer-bottom">
+            <div>&copy; 2025 NESTAR GAZE. All Rights Reserved.</div>
+            <div class="footer-links">
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms of Use</a>
+            </div>
         </div>
-
-        <div class="footer-col">
-          <h5>Shop</h5>
-          <ul>
-            <li><a href="shop.html">All Products</a></li>
-            <li><a href="hoodies.html">Hoodies</a></li>
-            <li><a href="tees.html">Graphic Tees</a></li>
-            <li><a href="sale.html">Sale</a></li>
-          </ul>
-        </div>
-
-        <div class="footer-col">
-          <h5>Follow Us</h5>
-          <div class="social-icons">
-            <a href="#"><i class="fab fa-instagram"></i></a>
-            <a href="#"><i class="fab fa-facebook-f"></i></a>
-            <a href="#"><i class="fab fa-twitter"></i></a>
-          </div>
-
-          <div style="margin-top:18px;">
-            <input type="email" placeholder="Enter your email" id="footerEmailCart" style="padding:10px 12px; border-radius:4px; border:1px solid rgba(255,255,255,0.06); background:transparent; color:#fff; width:100%; margin-bottom:8px;">
-            <button class="btn-subscribe" onclick="subscribeNewsletter()" style="padding:10px 16px; background:#fff; color:#000; border:none; font-weight:700; border-radius:4px; width:100%;">SUBSCRIBE</button>
-          </div>
-        </div>
-      </div>
-
-      <div class="footer-bottom">
-        <div>&copy; 2025 NESTAR GAZE. All Rights Reserved.</div>
-        <div class="footer-right">
-          <a href="#">Privacy Policy</a>
-          <a href="#">Terms of Use</a>
-        </div>
-      </div>
     </div>
-  </footer>
+</footer>
 
-  <!-- Scripts -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
-  <script src="../js/products.js"></script>
-  <script src="../js/notifications.js"></script>
-  <script src="../js/cart.js"></script>
-  <script src="../js/wishlist.js"></script>
-  <script src="../js/cart-page.js"></script>
-  <script src="../js/ui-interactions.js"></script>
-  <script src="../js/search.js"></script>
+  
   <script>
-    // Helper functions
-    function closePromo() {
-        document.querySelector('.promo-bar').style.display = 'none';
-    }
-    
-    function closeAllSidebars() {
-        document.getElementById('cartSidebar')?.classList.remove('active');
-        document.getElementById('wishlistSidebar')?.classList.remove('active');
-        document.getElementById('backdrop')?.classList.remove('active');
-        document.body.style.overflow = '';
-    }
-    
-    function subscribeNewsletter() {
-        const email = document.getElementById('footerEmailCart')?.value.trim();
-        if (email && email.includes('@')) {
-            alert('Thanks for subscribing: ' + email);
-            document.getElementById('footerEmailCart').value = '';
-        } else {
-            alert('Please enter a valid email');
-        }
-    }
-    
-    // Initialize
-    document.addEventListener('DOMContentLoaded', function() {
-        if (typeof initCart === 'function') initCart();
-        if (typeof initWishlist === 'function') initWishlist();
+    // INLINE CART PAGE - NO EXTERNAL DEPENDENCIES
+    (function() {
+        console.log('🛒 Cart Page Loading...');
         
-        // Render cart page after a short delay to ensure cart is loaded
-        setTimeout(() => {
-            if (typeof renderCartPage === 'function') renderCartPage();
-        }, 100);
-    });
+        // Get cart from localStorage
+        function getCart() {
+            const saved = localStorage.getItem('nestarGazeCart');
+            if (!saved) {
+                console.log('📭 No cart data found');
+                return [];
+            }
+            try {
+                const cart = JSON.parse(saved);
+                console.log('✅ Loaded cart:', cart.length, 'items');
+                return cart;
+            } catch (e) {
+                console.error('❌ Error parsing cart:', e);
+                return [];
+            }
+        }
+        
+        // Format price
+        function formatPrice(val) {
+            return '₱' + val.toLocaleString() + '.00';
+        }
+        
+        // Get image path
+        function getImg(path) {
+            if (!path) return '../images/placeholder.jpg';
+            const clean = path.replace(/^\.\.\//, '').replace(/^images\//, '');
+            return '../images/' + clean;
+        }
+        
+        // Save cart
+        function saveCart(cart) {
+            localStorage.setItem('nestarGazeCart', JSON.stringify(cart));
+            updateBadge();
+        }
+        
+        // Update cart badge
+        function updateBadge() {
+            const cart = getCart();
+            const count = cart.reduce((sum, item) => sum + item.quantity, 0);
+            const badge = document.getElementById('cartCount');
+            if (badge) {
+                badge.textContent = count;
+                badge.style.display = count > 0 ? 'flex' : 'none';
+            }
+        }
+        
+        // Change quantity
+        window.changeQty = function(cartItemId, newQty) {
+            let cart = getCart();
+            const item = cart.find(i => String(i.cartItemId) === String(cartItemId));
+            if (item) {
+                item.quantity = parseInt(newQty);
+                saveCart(cart);
+                renderPage();
+            }
+        };
+        
+        // Remove item
+        window.removeItem = function(cartItemId) {
+            if (!confirm('Remove this item?')) return;
+            let cart = getCart();
+            cart = cart.filter(i => String(i.cartItemId) !== String(cartItemId));
+            saveCart(cart);
+            renderPage();
+        };
+        
+        // Render page
+        function renderPage() {
+            const cart = getCart();
+            const container = document.getElementById('cartItemsPage');
+            const summary = document.getElementById('cartSummaryPage');
+            
+            if (!cart || cart.length === 0) {
+                container.innerHTML = `
+                    <div class="empty-cart-page">
+                        <div class="empty-cart-icon"><i class="fas fa-shopping-bag"></i></div>
+                        <h2>Your Bag is Empty</h2>
+                        <p>Looks like you haven't added anything yet</p>
+                        <a href="shop.html" class="btn-shop-now"><i class="fas fa-arrow-left"></i> Continue Shopping</a>
+                    </div>
+                `;
+                summary.innerHTML = '<div class="summary-empty" style="text-align:center;padding:40px;color:#999;">No items</div>';
+                return;
+            }
+            
+            // Render items
+            container.innerHTML = `
+                <div class="cart-items-header">
+                    <h2>Shopping Bag (${cart.length} ${cart.length === 1 ? 'Item' : 'Items'})</h2>
+                </div>
+                <div class="cart-items-list">
+                    ${cart.map(item => {
+                        const total = item.price * item.quantity;
+                        return `
+                            <div class="cart-page-item">
+                                <div class="cart-page-item-image">
+                                    <img src="${getImg(item.img || item.image)}" alt="${item.name}">
+                                </div>
+                                <div class="cart-page-item-details">
+                                    <div class="item-header">
+                                        <div class="item-info">
+                                            <h3 class="item-brand">${item.brand || 'NESTAR GAZE'}</h3>
+                                            <h4 class="item-name">${item.name}</h4>
+                                        </div>
+                                        <div class="item-price-mobile">${formatPrice(total)}</div>
+                                    </div>
+                                    <div class="item-attributes">
+                                        <div class="attribute"><span class="label">Size:</span><span class="value">${item.size || 'M'}</span></div>
+                                        <div class="attribute"><span class="label">Color:</span><span class="value">${item.color || 'Black'}</span></div>
+                                    </div>
+                                    <div class="item-price-desktop">
+                                        <span class="unit-price">₱${item.price.toLocaleString()} each</span>
+                                    </div>
+                                    <div class="item-actions">
+                                        <div class="quantity-selector-cart">
+                                            <label>Qty:</label>
+                                            <select onchange="changeQty('${item.cartItemId}', this.value)">
+                                                ${[1,2,3,4,5,6,7,8,9,10].map(n => 
+                                                    `<option value="${n}" ${item.quantity === n ? 'selected' : ''}>${n}</option>`
+                                                ).join('')}
+                                            </select>
+                                        </div>
+                                        <button class="btn-remove-item" onclick="removeItem('${item.cartItemId}')">
+                                            <i class="fas fa-trash-alt"></i><span>Remove</span>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="cart-page-item-total">${formatPrice(total)}</div>
+                            </div>
+                        `;
+                    }).join('')}
+                </div>
+            `;
+            
+            // Calculate totals
+            const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            const shipping = subtotal >= 5000 ? 0 : 150;
+            const tax = Math.round(subtotal * 0.12);
+            const total = subtotal + shipping + tax;
+            
+            // Render summary
+            summary.innerHTML = `
+                <div class="order-summary-sticky">
+                    <h2 class="summary-title">Order Summary</h2>
+                    <div class="summary-details">
+                        <div class="summary-row"><span>Subtotal (${cart.length} items)</span><span>${formatPrice(subtotal)}</span></div>
+                        <div class="summary-row"><span>Shipping</span><span class="${shipping === 0 ? 'free-shipping' : ''}">${shipping === 0 ? 'FREE' : formatPrice(shipping)}</span></div>
+                        <div class="summary-row"><span>Estimated Tax</span><span>${formatPrice(tax)}</span></div>
+                        ${subtotal < 5000 ? `
+                            <div class="shipping-progress">
+                                <div class="progress-bar-container">
+                                    <div class="progress-bar-fill" style="width:${(subtotal/5000)*100}%"></div>
+                                </div>
+                                <p class="progress-text"><i class="fas fa-truck"></i> Add ${formatPrice(5000-subtotal)} more for <strong>FREE SHIPPING</strong></p>
+                            </div>
+                        ` : `
+                            <div class="free-shipping-achieved"><i class="fas fa-check-circle"></i><span>You've earned FREE SHIPPING!</span></div>
+                        `}
+                    </div>
+                    <div class="summary-total"><span>Total</span><span class="total-amount">${formatPrice(total)}</span></div>
+                    <button class="btn-checkout-full" onclick="alert('Checkout: ${formatPrice(total)}')"><i class="fas fa-lock"></i> Secure Checkout</button>
+                    <div class="accepted-payments">
+                        <p>We Accept</p>
+                        <div class="payment-icons">
+                            <i class="fab fa-cc-visa"></i>
+                            <i class="fab fa-cc-mastercard"></i>
+                            <i class="fab fa-cc-amex"></i>
+                            <i class="fab fa-cc-paypal"></i>
+                        </div>
+                    </div>
+                    <a href="shop.html" class="continue-shopping"><i class="fas fa-arrow-left"></i> Continue Shopping</a>
+                </div>
+            `;
+            
+            updateBadge();
+        }
+        
+        // Initialize
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', renderPage);
+        } else {
+            renderPage();
+        }
+        
+        console.log('✅ Cart page ready');
+    })();
   </script>
 </body>
 </html>

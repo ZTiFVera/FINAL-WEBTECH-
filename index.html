@@ -222,107 +222,108 @@
     <!-- Modal -->
     <div id="productModal" class="product-modal"></div>
 
-    <!-- Footer -->
-    <footer>
-        <div class="container-lg">
-
-            <div class="footer-grid">
-
-                <div class="footer-col">
-                    <h5>Get Help</h5>
-                    <ul>
-                        <li><a href="#">Order Status</a></li>
-                        <li><a href="#">Shipping Info</a></li>
-                        <li><a href="#">Returns</a></li>
-                        <li><a href="#">Contact Us</a></li>
-                        <li><a href="#">FAQ</a></li>
-                    </ul>
-                </div>
-
-                <div class="footer-col">
-                    <h5>About</h5>
-                    <ul>
-                        <li><a href="#">Our Story</a></li>
-                        <li><a href="#">News</a></li>
-                        <li><a href="#">Careers</a></li>
-                        <li><a href="#">Sustainability</a></li>
-                        <li><a href="#">Press</a></li>
-                    </ul>
-                </div>
-
-                <div class="footer-col">
-                    <h5>Shop</h5>
-                    <ul>
-                        <li><a href="pages/shop.html">All Products</a></li>
-                        <li><a href="pages/hoodies.html">Hoodies</a></li>
-                        <li><a href="pages/tees.html">Graphic Tees</a></li>
-                        <li><a href="pages/sale.html">Sale</a></li>
-                        <li><a href="pages/new.html">New Arrivals</a></li>
-                    </ul>
-                </div>
-
-                <div class="footer-col">
-                    <h5>Follow Us</h5>
-                    <div class="social-icons">
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                        <a href="#"><i class="fab fa-facebook"></i></a>
-                        <a href="#"><i class="fab fa-twitter"></i></a>
-                        <a href="#"><i class="fab fa-youtube"></i></a>
-                        <a href="#"><i class="fab fa-tiktok"></i></a>
-                    </div>
-
-                    <div class="newsletter-signup">
-                        <input type="email" placeholder="Enter your email" id="emailInput">
-                        <button onclick="subscribeNewsletter()" class="btn-subscribe">Subscribe</button>
-                    </div>
-                </div>
-
+    <!-- Footer - Corrected Version -->
+<footer>
+    <div class="container-lg">
+        <div class="footer-grid">
+            
+            <div class="footer-col">
+                <h5>GET HELP</h5>
+                <ul>
+                    <li><a href="#">Order Status</a></li>
+                    <li><a href="#">Shipping Info</a></li>
+                    <li><a href="#">Returns</a></li>
+                    <li><a href="#">Contact Us</a></li>
+                </ul>
             </div>
 
-            <div class="footer-bottom">
-                <div>&copy; 2025 NESTAR GAZE. All Rights Reserved.</div>
-                <div>
-                    <a href="#">Privacy Policy</a>
-                    <a href="#">Terms of Use</a>
-                    <a href="#">Cookie Settings</a>
+            <div class="footer-col">
+                <h5>ABOUT</h5>
+                <ul>
+                    <li><a href="pages/our-story.html">Our Story</a></li>
+                    <li><a href="#">News</a></li>
+                    <li><a href="#">Careers</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h5>SHOP</h5>
+                <ul>
+                    <li><a href="pages/shop.html">All Products</a></li>
+                    <li><a href="pages/hoodies.html">Hoodies</a></li>
+                    <li><a href="pages/tees.html">Graphic Tees</a></li>
+                    <li><a href="pages/sale.html">Sale</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h5>FOLLOW US</h5>
+                <div class="social-icons">
+                    <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                </div>
+
+                <div class="newsletter-signup">
+                    <input type="email" placeholder="Enter your email" id="emailInput">
+                    <button onclick="subscribeNewsletter()" class="btn-subscribe">SUBSCRIBE</button>
                 </div>
             </div>
 
         </div>
-    </footer>
+
+        <div class="footer-bottom">
+            <div>&copy; 2025 NESTAR GAZE. All Rights Reserved.</div>
+            <div class="footer-links">
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms of Use</a>
+            </div>
+        </div>
+    </div>
+</footer>
 
     <!-- Backdrop -->
     <div class="sidebar-backdrop" id="backdrop" onclick="closeAllSidebars()"></div>
 
-    <!-- JS Scripts FIXED paths -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
+     <!-- Replace the bottom script section of index.html with this -->
 
-    <script src="js/products.js"></script>
-    <script src="js/product-detail.js"></script>
-    <script src="js/recently-viewed.js"></script>
-    <script src="js/related-products.js"></script>
-    <script src="js/notifications.js"></script>
-    <script src="js/cart.js"></script>
-    <script src="js/wishlist.js"></script>
-    <script src="js/search.js"></script>
-    <script src="js/filter.js"></script>
-    <script src="js/category-pages.js"></script>
-    <script src="js/main.js"></script>
+<!-- JS Scripts FIXED paths -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            setTimeout(function() {
-                const recentlyViewed = JSON.parse(localStorage.getItem('nestarGazeRecentlyViewed') || '[]');
-                const section = document.getElementById('recentlyViewedSection');
+<script src="js/products.js"></script>
+<script src="js/product-detail.js"></script>
+<script src="js/recently-viewed.js"></script>
+<script src="js/related-products.js"></script>
+<script src="js/notifications.js"></script>
+<script src="js/cart.js"></script>
+<script src="js/wishlist.js"></script>
+ <script src="js/wishlist-buttons.js"></script>
+<script src="js/search.js"></script>
+<script src="js/filter.js"></script>
+<script src="js/category-pages.js"></script>
+<script src="js/main.js"></script>
 
-                if (recentlyViewed.length > 0) {
-                    section.style.display = 'block';
-                    renderRecentlyViewed();
-                }
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        setTimeout(function() {
+            const recentlyViewed = JSON.parse(localStorage.getItem('nestarGazeRecentlyViewed') || '[]');
+            const section = document.getElementById('recentlyViewedSection');
 
-            }, 500);
-        });
-    </script>
+            if (recentlyViewed.length > 0) {
+                section.style.display = 'block';
+                renderRecentlyViewed();
+            }
+        }, 500);
+    });
+    
+    // ✅ FIX: Prevent heart icon clicks from triggering product card clicks
+    document.addEventListener('click', function(e) {
+        // If clicking on wishlist button or its icon, stop propagation
+        if (e.target.closest('.product-wishlist-btn')) {
+            e.stopPropagation();
+        }
+    }, true); // Use capture phase
+</script>
 
 </body>
 </html>
