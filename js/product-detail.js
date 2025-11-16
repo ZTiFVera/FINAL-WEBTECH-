@@ -5,226 +5,203 @@ let selectedColor = null;
 let productQuantity = 1;
 let currentImageIndex = 0;
 
+
+// Fix image path for pages inside /pages/
+function fixPath(path) {
+    if (window.location.pathname.includes("/pages/")) {
+        if (path.startsWith("../") || path.startsWith("http")) return path;
+        return "../" + path;
+    }
+    return path;
+}
+
 // Product images database (multiple images per product)
-const productImages = {
+ const productImages = {
     1: [
-        "images/premiumziphoodie.webp",
-        "images/premiumziphoodie2.jpg",
-         "images/premiumhod3.jpg",
-          "images/premiumhod4.jpg"
-        
-        
+        fixPath("images/premiumziphoodie.webp"),
+        fixPath("images/premiumziphoodie2.jpg"),
+        fixPath("images/premiumhod3.jpg"),
+        fixPath("images/premiumhod4.jpg")
     ],
+
     2: [
-        "images/heavyweightshirt.jpg",
-        "images/heavyhod2.jpg",
-        "images/heavyhod3.jpg",
-        "images/heavyhod4.jpg"
-
-         
-        
+        fixPath("images/heavyweightshirt.jpg"),
+        fixPath("images/heavyhod2.jpg"),
+        fixPath("images/heavyhod3.jpg"),
+        fixPath("images/heavyhod4.jpg")
     ],
 
-    3:[
-       "images/navycristieoversizedhod.webp",
-       "images/navyhod2.jpg",
-       "images/navyhod3.jpg",
-       "images/navyhod4.jpg",
-       "images/navyhod5.jpg",
-
+    3: [
+        fixPath("images/navycristieoversizedhod.webp"),
+        fixPath("images/navyhod2.jpg"),
+        fixPath("images/navyhod3.jpg"),
+        fixPath("images/navyhod4.jpg"),
+        fixPath("images/navyhod5.jpg")
     ],
 
-    4:[
-       "images/vintagehod.jpg",
-       "images/vintagehod2.jpg",
-       "images/vintagehod3.jpg",
-       "images/vintagehod4.jpg"
-        
+    4: [
+        fixPath("images/vintagehod.jpg"),
+        fixPath("images/vintagehod2.jpg"),
+        fixPath("images/vintagehod3.jpg"),
+        fixPath("images/vintagehod4.jpg")
+    ],
 
+    5: [
+        fixPath("images/westcoasthood.jpg"),
+        fixPath("images/westcoasthood2.jpg"),
+        fixPath("images/westcoasthood3.jpg")
     ],
-    5:[
-       "images/westcoasthood.jpg",
-       "images/westcoasthood2.jpg",
-       "images/westcoasthood3.jpg"
-     
-    ],
-    6:[
-            
-        
-          "images/vengeanceshirt.webp",
-           "images/vengeanceshirt2.jpg",
-           
-            "images/vengeanceshirt3.jpg",
-            "images/vengeanceshirt4.jpg"
-    ],
-     
-     7:[
-           
-           "images/ufcfashionshirt2.jpg",
-           "images/ufcfashionshirt.webp",
-            "images/ufcfashionshirt3.jpg",
-            "images/ufcfashionshirt4.jpg"
-    ],
-     
-    8:[
-         "images/streetweartee.jpg",
-         "images/streetweartee2.jpg"
-            
 
+    6: [
+        fixPath("images/vengeanceshirt.webp"),
+        fixPath("images/vengeanceshirt2.jpg"),
+        fixPath("images/vengeanceshirt3.jpg"),
+        fixPath("images/vengeanceshirt4.jpg")
+    ],
+
+    7: [
+        fixPath("images/ufcfashionshirt2.jpg"),
+        fixPath("images/ufcfashionshirt.webp"),
+        fixPath("images/ufcfashionshirt3.jpg"),
+        fixPath("images/ufcfashionshirt4.jpg")
+    ],
+
+    8: [
+        fixPath("images/streetweartee.jpg"),
+        fixPath("images/streetweartee2.jpg")
     ],
 
     9: [
-        "images/civilcontee.jpg",
-        "images/cvilcontee2.jpg",
-        "images/civilcontee3.jpg",
-        "images/civilcontee4.jpg"
-
-
+        fixPath("images/civilcontee.jpg"),
+        fixPath("images/cvilcontee2.jpg"),
+        fixPath("images/civilcontee3.jpg"),
+        fixPath("images/civilcontee4.jpg")
     ],
-        
-        // Add more product images as needed
 
     10: [
-            "images/hellpulseboxyshirt.jpg",
-            "images/hellpulseboxyshirt2.jpg",
-            "images/hellpulseboxyshirt3.jpg",
-            "images/hellpulseboxyshirt4.jpg"
-
-
+        fixPath("images/hellpulseboxyshirt.jpg"),
+        fixPath("images/hellpulseboxyshirt2.jpg"),
+        fixPath("images/hellpulseboxyshirt3.jpg"),
+        fixPath("images/hellpulseboxyshirt4.jpg")
     ],
 
     11: [
-
-        "images/camopants.webp",
-        "images/camopants2.jpg",
-        "images/camopants3.jpg",
-        "images/camopants4.jpg",
-        "images/camopants5.jpg"
-
-    
+        fixPath("images/camopants.webp"),
+        fixPath("images/camopants2.jpg"),
+        fixPath("images/camopants3.jpg"),
+        fixPath("images/camopants4.jpg"),
+        fixPath("images/camopants5.jpg")
     ],
+
     12: [
-        "images/galtbrownpants.webp",
-        "images/galtbrownpants2.jpg",
-        "images/galtbrownpants3.jpg",
-        "images/galtbrownpants4.jpg"
+        fixPath("images/galtbrownpants.webp"),
+        fixPath("images/galtbrownpants2.jpg"),
+        fixPath("images/galtbrownpants3.jpg"),
+        fixPath("images/galtbrownpants4.jpg")
     ],
 
     13: [
-        "images/fordkneepants.webp",
-        "images/fordkneepants2.jpg",
-        "images/fordkneepants3.webp",
-        "images/fordkneepants4.webp",
-        "images/fordkneepants5.webp"
+        fixPath("images/fordkneepants.webp"),
+        fixPath("images/fordkneepants2.jpg"),
+        fixPath("images/fordkneepants3.webp"),
+        fixPath("images/fordkneepants4.webp"),
+        fixPath("images/fordkneepants5.webp")
     ],
 
     14: [
-
-     " images/cargodylanpants.webp",
-        "images/cargodylanpants2.jpg",
-        "images/cargodylanpants3.jpg",
-        "images/cargodylanpants4.jpg",
-        "images/cargodylanpants5.jpg"
+        fixPath("images/cargodylanpants.webp"),
+        fixPath("images/cargodylanpants2.jpg"),
+        fixPath("images/cargodylanpants3.jpg"),
+        fixPath("images/cargodylanpants4.jpg"),
+        fixPath("images/cargodylanpants5.jpg")
     ],
+
     15: [
-        " images/raredenimpants.jpg",
-        " images/raredenimpants2.jpg",
-        " images/raredenimpants3.jpg",
-        "images/raredenimpants4.jpg ",
-        " images/raredenimpants5.jpg"
+        fixPath("images/raredenimpants.jpg"),
+        fixPath("images/raredenimpants2.jpg"),
+        fixPath("images/raredenimpants3.jpg"),
+        fixPath("images/raredenimpants4.jpg"),
+        fixPath("images/raredenimpants5.jpg")
     ],
 
     16: [
-        "images/fauxjacket.jpg",
-        "images/faucjacket2.jpg",
-        "images/fauxjacket3.jpg",
-        "images/fauxjacket4.jpg"
-    ]
-,
+        fixPath("images/fauxjacket.jpg"),
+        fixPath("images/faucjacket2.jpg"),
+        fixPath("images/fauxjacket3.jpg"),
+        fixPath("images/fauxjacket4.jpg")
+    ],
+
     17: [
-        "images/studjacket.jpg",
-        "images/studjacket2.jpg",
-        "images/studjacket3.jpg",
-        "images/studjacket4.jpg"
+        fixPath("images/studjacket.jpg"),
+        fixPath("images/studjacket2.jpg"),
+        fixPath("images/studjacket3.jpg"),
+        fixPath("images/studjacket4.jpg")
     ],
+
     18: [
-         "images/brooksdenimjacket.webp",
-        "images/brooksdenimjacket2.jpg",
-        "images/brooksdenimjacket3.jpg",
-        "images/brooksdenimjacket4.jpg"
-    ]   
-
-    ,
-
-    19: [   
-        "images/baggysweatpants.webp",
-        "images/baggysweatpants2.jpg",
-        "images/baggysweatpants3.jpg",
-        "images/baggysweatpants4.jpg"
-         
+        fixPath("images/brooksdenimjacket.webp"),
+        fixPath("images/brooksdenimjacket2.jpg"),
+        fixPath("images/brooksdenimjacket3.jpg"),
+        fixPath("images/brooksdenimjacket4.jpg")
     ],
+
+    19: [
+        fixPath("images/baggysweatpants.webp"),
+        fixPath("images/baggysweatpants2.jpg"),
+        fixPath("images/baggysweatpants3.jpg"),
+        fixPath("images/baggysweatpants4.jpg")
+    ],
+
     20: [
-        "images/palmdeseserttee.webp",
-        "images/palmdeserttee2.jpg",
-        "images/palmdeserttee3.jpg",
-        "images/palmdeserttee4.jpg"
+        fixPath("images/palmdeseserttee.webp"),
+        fixPath("images/palmdeserttee2.jpg"),
+        fixPath("images/palmdeserttee3.jpg"),
+        fixPath("images/palmdeserttee4.jpg")
     ],
- 21: [
-        "images/handbookhoodie.jpg",
-        "images/handbookhoodie2.jpg",
-        "images/handbookhoodie3.jpg",
-        "images/handbookhoodie4.jpg"
+
+    21: [
+        fixPath("images/handbookhoodie.jpg"),
+        fixPath("images/handbookhoodie2.jpg"),
+        fixPath("images/handbookhoodie3.jpg"),
+        fixPath("images/handbookhoodie4.jpg")
     ],
- 22: [
-    "images/underhumtee.jpg",
-    "images/underhumtee2.jpg",
-    "images/underhumtee3.jpg",
-    "images/underhumtee4.jpg"
- ]
-,
+
+    22: [
+        fixPath("images/underhumtee.jpg"),
+        fixPath("images/underhumtee2.jpg"),
+        fixPath("images/underhumtee3.jpg"),
+        fixPath("images/underhumtee4.jpg")
+    ],
+
     23: [
-    "images/skimmertee.webp",
-    "images/skimmertee2.jpg",
-    "images/skimmertee3.jpg",
-    "images/skimmertee4.jpg"
- ]
- ,
- 24: [
-    "images/obscurapants.webp",
-    "images/obscurapants2.jpg",
-    "images/obscurapants3.jpg",
-    "images/obscurapants4.jpg",
-    "images/obscurapants5.jpg"
+        fixPath("images/skimmertee.webp"),
+        fixPath("images/skimmertee2.jpg"),
+        fixPath("images/skimmertee3.jpg"),
+        fixPath("images/skimmertee4.jpg")
     ],
 
-    25
-: [
-     "images/cyberhoodie.webp",
-     "images/cyberhoodie2.jpg",
-     "images/cyberhoodie3.jpg",
-     "images/cyberhoodie4.jpg"
- ]
+    24: [
+        fixPath("images/obscurapants.webp"),
+        fixPath("images/obscurapants2.jpg"),
+        fixPath("images/obscurapants3.jpg"),
+        fixPath("images/obscurapants4.jpg"),
+        fixPath("images/obscurapants5.jpg")
+    ],
 
-    
-    
-
-
-
-    
-
-    
-
-
-
-
-
-
-
-
-
-
-    // Add more product images as needed
+    25: [
+        fixPath("images/cyberhoodie.webp"),
+        fixPath("images/cyberhoodie2.jpg"),
+        fixPath("images/cyberhoodie3.jpg"),
+        fixPath("images/cyberhoodie4.jpg")
+    ]
 };
+
+
+
+
+
+
+    // Add more product images as neede
 
 // Available sizes
 const sizes = ['XS', 'S', 'M', 'L', 'XL', 'XXL'];
