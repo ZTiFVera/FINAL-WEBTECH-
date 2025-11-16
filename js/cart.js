@@ -1,5 +1,23 @@
-  
+ // js/cart.js - FIXED: Image paths and rendering
 let cartItems = [];
+
+// Helper function to fix image paths based on current location
+function getCorrectImagePath(imgPath) {
+    if (!imgPath) return 'images/placeholder.jpg';
+    
+    // If already has ../ or starts with images/, handle accordingly
+    const isInPagesFolder = window.location.pathname.includes('/pages/');
+    
+    // Remove any existing path prefixes
+    let cleanPath = imgPath.replace(/^\.\.\//, '').replace(/^images\//, '');
+    
+    // Return correct path based on location
+    if (isInPagesFolder) {
+        return `../images/${cleanPath}`;
+    } else {
+        return `images/${cleanPath}`;
+    }
+}
 
 // Initialize cart from localStorage
 function initCart() {
@@ -29,11 +47,13 @@ function addToCart(productId, quantity = 1, size = 'M', color = 'Black') {
         showNotification('Product not found', 'error');
         return;
     }
+    
     const existingItem = cartItems.find(item => 
         item.id === productId && 
         item.size === size && 
         item.color === color
     );
+    
     if (existingItem) {
         existingItem.quantity += quantity;
     } else {
@@ -43,9 +63,12 @@ function addToCart(productId, quantity = 1, size = 'M', color = 'Black') {
             quantity,
             size: size,
             color: color,
-            cartItemId: cartItemId
+            cartItemId: cartItemId,
+            // Ensure image property exists
+            img: product.img || product.image
         });
     }
+    
     updateCartCount();
     renderCart();
     saveCart();
@@ -87,10 +110,11 @@ function updateCartCount() {
     }
 }
 
-// Render cart with enhanced item display
+// Render cart sidebar with FIXED image paths
 function renderCart() {
     const cartItemsContainer = document.getElementById('cartItems');
     if (!cartItemsContainer) return;
+    
     if (cartItems.length === 0) {
         cartItemsContainer.innerHTML = `
             <div class="empty-cart">
@@ -102,33 +126,32 @@ function renderCart() {
         updateCartTotal();
         return;
     }
-    cartItemsContainer.innerHTML = cartItems.map(item => `
+    
+    cartItemsContainer.innerHTML = cartItems.map(item => {
+        const imgPath = getCorrectImagePath(item.img || item.image);
+        
+        return `
         <div class="cart-item">
-            <img src="${item.img}" alt="${item.name}" class="cart-item-img" 
-                 onerror="this.style.backgroundColor='#f0f0f0'">
+            <img src="${imgPath}" alt="${item.name}" class="cart-item-img" 
+                 onerror="this.src='${getCorrectImagePath('placeholder.jpg')}'; this.style.backgroundColor='#f0f0f0'">
             <div class="cart-item-info">
                 <div class="cart-item-name">${item.name}</div>
                 <div class="cart-item-price">₱${item.price.toLocaleString()}</div>
-                <div class="cart-item-variants">
-                    <span class="cart-item-size">Size: ${item.size}</span>
-                    <span class="cart-item-color">Color: ${item.color}</span>
+                <div class="cart-item-size" style="font-size: 12px; color: var(--text-gray); margin: 4px 0;">
+                    Size: ${item.size} • Color: ${item.color}
                 </div>
-                <div class="cart-item-controls">
-                    <div class="cart-item-qty">
-                        <button class="qty-btn" onclick="updateCartQuantity('${item.cartItemId}', ${item.quantity - 1})">−</button>
-                        <span class="qty-value">${item.quantity}</span>
-                        <button class="qty-btn" onclick="updateCartQuantity('${item.cartItemId}', ${item.quantity + 1})">+</button>
-                    </div>
-                    <button class="cart-item-remove" onclick="removeFromCart('${item.cartItemId}')">
-                        <i class="fas fa-trash"></i>
-                    </button>
+                <div class="cart-item-qty">
+                    <button class="qty-btn" onclick="updateCartQuantity('${item.cartItemId}', ${item.quantity - 1})">−</button>
+                    <span>${item.quantity}</span>
+                    <button class="qty-btn" onclick="updateCartQuantity('${item.cartItemId}', ${item.quantity + 1})">+</button>
                 </div>
-                <div class="cart-item-total">
-                    ₱${(item.price * item.quantity).toLocaleString()}
-                </div>
+                <button class="cart-item-remove" onclick="removeFromCart('${item.cartItemId}')">
+                    Remove
+                </button>
             </div>
         </div>
-    `).join('');
+    `}).join('');
+    
     updateCartTotal();
 }
 
@@ -137,35 +160,35 @@ function updateCartTotal() {
     const subtotal = cartItems.reduce((sum, item) => sum + (item.price * item.quantity), 0);
     const shipping = subtotal >= 5000 ? 0 : 150;
     const total = subtotal + shipping;
+    
     const cartTotal = document.getElementById('cartTotal');
     if (cartTotal) {
         cartTotal.textContent = `₱${total.toLocaleString()}.00`;
     }
+    
     const cartFooter = document.querySelector('.cart-footer');
-    if (cartFooter) {
+    if (cartFooter && cartItems.length > 0) {
         cartFooter.innerHTML = `
-            <div class="cart-summary">
-                <div class="cart-summary-row">
+            <div style="padding: 0 0 12px 0; border-bottom: 1px solid var(--border-gray);">
+                <div style="display: flex; justify-content: space-between; margin-bottom: 8px; font-size: 14px;">
                     <span>Subtotal:</span>
                     <span>₱${subtotal.toLocaleString()}.00</span>
                 </div>
-                <div class="cart-summary-row">
+                <div style="display: flex; justify-content: space-between; margin-bottom: 8px; font-size: 14px;">
                     <span>Shipping:</span>
                     <span>${shipping === 0 ? 'FREE' : '₱' + shipping + '.00'}</span>
                 </div>
                 ${subtotal < 5000 ? `
-                    <div class="shipping-notice">
+                    <div style="font-size: 12px; color: var(--text-gray); margin-top: 8px;">
                         <i class="fas fa-truck"></i> Add ₱${(5000 - subtotal).toLocaleString()} more for free shipping
                     </div>
                 ` : ''}
             </div>
-            <div class="cart-total">
+            <div class="cart-total" style="padding-top: 12px;">
                 <strong>Total:</strong>
                 <span>₱${total.toLocaleString()}.00</span>
             </div>
-            <button class="btn-checkout" onclick="checkout()">
-                <i class="fas fa-lock"></i> Checkout
-            </button>
+            <button class="btn-checkout" onclick="checkout()">Checkout</button>
             <button class="btn-continue" onclick="toggleCart()">Continue Shopping</button>
         `;
     }
@@ -176,8 +199,10 @@ function toggleCart() {
     const cartSidebar = document.getElementById('cartSidebar');
     const backdrop = document.getElementById('backdrop');
     if (!cartSidebar || !backdrop) return;
+    
     cartSidebar.classList.toggle('active');
     backdrop.classList.toggle('active');
+    
     if (cartSidebar.classList.contains('active')) {
         document.body.style.overflow = 'hidden';
         renderCart();
@@ -186,22 +211,24 @@ function toggleCart() {
     }
 }
 
-// Checkout function: navigate to cart page (full page) using helper if present
+// Checkout function
 function checkout() {
     if (cartItems.length === 0) {
         showNotification('Your cart is empty', 'error');
         return;
     }
+    
     const subtotal = cartItems.reduce((sum, item) => sum + (item.price * item.quantity), 0);
     const shipping = subtotal >= 5000 ? 0 : 150;
     const total = subtotal + shipping;
+    
     showNotification(`Proceeding to checkout - Total: ₱${total.toLocaleString()}.00`, 'success');
-    // Navigate to full cart page if helper exists
+    
+    // Navigate to cart page
     if (typeof window.goToPagesPage === 'function') {
         const page = window.location.pathname.includes('/pages/') ? 'cart.html' : 'pages/cart.html';
         window.goToPagesPage(page);
     } else {
-        // fallback: open cart page
         window.location.href = window.location.pathname.includes('/pages/') ? 'cart.html' : 'pages/cart.html';
     }
 }
@@ -215,3 +242,11 @@ document.addEventListener('DOMContentLoaded', function() {
 window.addEventListener('beforeunload', function() {
     saveCart();
 });
+
+// Make functions available globally
+window.initCart = initCart;
+window.addToCart = addToCart;
+window.removeFromCart = removeFromCart;
+window.updateCartQuantity = updateCartQuantity;
+window.toggleCart = toggleCart;
+window.checkout = checkout;
