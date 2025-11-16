@@ -1,0 +1,810 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - NESTAR GAZE</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/responsive.css">
+    <style>
+        /* Contact Page Styles */
+        .contact-hero {
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+            padding: 80px 0 60px;
+            text-align: center;
+            color: #fff;
+        }
+
+        .contact-hero h1 {
+            font-size: 56px;
+            font-weight: 900;
+            margin-bottom: 16px;
+            letter-spacing: -1px;
+            text-transform: uppercase;
+        }
+
+        .contact-hero p {
+            font-size: 18px;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Main Content */
+        .contact-main {
+            padding: 80px 0;
+            background: #fff;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: start;
+        }
+
+        /* Contact Form */
+        .contact-form-section h2 {
+            font-size: 32px;
+            font-weight: 900;
+            margin-bottom: 24px;
+            text-transform: uppercase;
+            letter-spacing: -0.5px;
+        }
+
+        .contact-form-section p {
+            color: #666;
+            margin-bottom: 32px;
+            font-size: 15px;
+            line-height: 1.6;
+        }
+
+        .form-group {
+            margin-bottom: 24px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 13px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 8px;
+            color: var(--primary-dark);
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 14px 16px;
+            border: 1px solid var(--border-gray);
+            border-radius: 4px;
+            font-size: 14px;
+            transition: all 0.2s;
+            background: #fff;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary-dark);
+            box-shadow: 0 0 0 3px rgba(26, 26, 26, 0.08);
+        }
+
+        .form-group textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        .form-group select {
+            cursor: pointer;
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23333' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 16px center;
+            padding-right: 40px;
+        }
+
+        .btn-submit {
+            width: 100%;
+            padding: 16px;
+            background: var(--primary-dark);
+            color: #fff;
+            border: none;
+            font-size: 14px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            cursor: pointer;
+            transition: all 0.3s;
+            border-radius: 4px;
+        }
+
+        .btn-submit:hover {
+            background: var(--secondary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+        }
+
+        .btn-submit:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        /* Contact Info Cards */
+        .contact-info h2 {
+            font-size: 32px;
+            font-weight: 900;
+            margin-bottom: 32px;
+            text-transform: uppercase;
+            letter-spacing: -0.5px;
+        }
+
+        .info-card {
+            background: var(--light-gray);
+            padding: 32px;
+            border-radius: 8px;
+            margin-bottom: 24px;
+            transition: all 0.3s;
+        }
+
+        .info-card:hover {
+            box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+            transform: translateY(-4px);
+        }
+
+        .info-card-icon {
+            width: 56px;
+            height: 56px;
+            background: var(--primary-dark);
+            color: #fff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+            font-size: 24px;
+        }
+
+        .info-card h3 {
+            font-size: 18px;
+            font-weight: 800;
+            margin-bottom: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .info-card p {
+            color: #666;
+            font-size: 14px;
+            line-height: 1.6;
+            margin-bottom: 0;
+        }
+
+        .info-card a {
+            color: var(--primary-dark);
+            text-decoration: none;
+            font-weight: 600;
+            transition: opacity 0.2s;
+        }
+
+        .info-card a:hover {
+            opacity: 0.7;
+        }
+
+        /* FAQ Section */
+        .faq-section {
+            padding: 80px 0;
+            background: var(--light-gray);
+        }
+
+        .faq-section h2 {
+            font-size: 40px;
+            font-weight: 900;
+            text-align: center;
+            margin-bottom: 56px;
+            text-transform: uppercase;
+            letter-spacing: -1px;
+        }
+
+        .faq-container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            background: #fff;
+            border-radius: 8px;
+            margin-bottom: 16px;
+            overflow: hidden;
+            border: 1px solid var(--border-gray);
+        }
+
+        .faq-question {
+            width: 100%;
+            padding: 24px;
+            background: none;
+            border: none;
+            text-align: left;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: background 0.2s;
+        }
+
+        .faq-question:hover {
+            background: var(--light-gray);
+        }
+
+        .faq-question i {
+            font-size: 14px;
+            transition: transform 0.3s;
+        }
+
+        .faq-item.active .faq-question i {
+            transform: rotate(180deg);
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+
+        .faq-item.active .faq-answer {
+            max-height: 500px;
+        }
+
+        .faq-answer-content {
+            padding: 0 24px 24px;
+            color: #666;
+            font-size: 14px;
+            line-height: 1.7;
+        }
+
+        /* Business Hours */
+        .hours-card {
+            background: #fff;
+            padding: 32px;
+            border-radius: 8px;
+            border: 1px solid var(--border-gray);
+        }
+
+        .hours-card h3 {
+            font-size: 18px;
+            font-weight: 800;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .hours-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 12px 0;
+            border-bottom: 1px solid var(--border-gray);
+            font-size: 14px;
+        }
+
+        .hours-row:last-child {
+            border-bottom: none;
+        }
+
+        .hours-day {
+            font-weight: 600;
+        }
+
+        .hours-time {
+            color: #666;
+        }
+
+        /* Social Section */
+        .social-section {
+            padding: 80px 0;
+            background: #fff;
+            text-align: center;
+        }
+
+        .social-section h2 {
+            font-size: 40px;
+            font-weight: 900;
+            margin-bottom: 24px;
+            text-transform: uppercase;
+            letter-spacing: -1px;
+        }
+
+        .social-section p {
+            font-size: 16px;
+            color: #666;
+            margin-bottom: 40px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .social-link {
+            width: 80px;
+            height: 80px;
+            background: var(--light-gray);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            color: var(--primary-dark);
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .social-link:hover {
+            background: var(--primary-dark);
+            color: #fff;
+            transform: translateY(-8px);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+        }
+
+        /* Success Message */
+        .success-message {
+            display: none;
+            background: #d4edda;
+            color: #155724;
+            padding: 20px;
+            border-radius: 4px;
+            margin-bottom: 24px;
+            border: 1px solid #c3e6cb;
+        }
+
+        .success-message.show {
+            display: block;
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .contact-grid {
+                grid-template-columns: 1fr;
+                gap: 60px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .contact-hero h1 {
+                font-size: 42px;
+            }
+
+            .contact-hero {
+                padding: 60px 0 40px;
+            }
+
+            .contact-main {
+                padding: 60px 0;
+            }
+
+            .faq-section {
+                padding: 60px 0;
+            }
+
+            .social-section {
+                padding: 60px 0;
+            }
+
+            .contact-form-section h2,
+            .contact-info h2 {
+                font-size: 28px;
+            }
+
+            .faq-section h2,
+            .social-section h2 {
+                font-size: 32px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .contact-hero h1 {
+                font-size: 32px;
+            }
+
+            .social-link {
+                width: 60px;
+                height: 60px;
+                font-size: 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Promo Bar -->
+    <div class="promo-bar">
+        <div class="promo-content">
+            FREE SHIPPING ON ORDERS OVER ₱5,000 • SHOP NEW ARRIVALS
+            <button class="promo-close" onclick="this.parentElement.parentElement.style.display='none'"><i class="fas fa-times"></i></button>
+        </div>
+    </div>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-custom">
+        <div class="container-lg">
+            <a class="navbar-brand navbar-brand-custom" href="../index.html">NESTAR GAZE</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link nav-link-custom dropdown-toggle" href="new.html" role="button" data-bs-toggle="dropdown">New</a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="new.html">Just In</a></li>
+                            <li><a class="dropdown-item" href="shop.html">All Products</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link nav-link-custom dropdown-toggle" href="shop.html" role="button" data-bs-toggle="dropdown">Shop</a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="shop.html">All Products</a></li>
+                            <li><a class="dropdown-item" href="hoodies.html">Hoodies</a></li>
+                            <li><a class="dropdown-item" href="tees.html">Graphic Tees</a></li>
+                            <li><a class="dropdown-item" href="pants.html">Pants</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item"><a class="nav-link nav-link-custom" href="sale.html">Sale</a></li>
+                </ul>
+            </div>
+            <div class="ms-auto d-flex gap-3 align-items-center navbar-icons">
+                <div class="search-bar-custom">
+                    <input type="text" id="searchInput" placeholder="Search products...">
+                    <i class="fas fa-search"></i>
+                </div>
+                <button class="icon-btn-custom" onclick="openWishlist()" title="Wishlist">
+                    <i class="far fa-heart"></i>
+                    <span class="badge bg-danger" id="wishlistCount" style="display:none;">0</span>
+                </button>
+                <button class="icon-btn-custom" onclick="window.location.href='cart.html'" title="Cart">
+                    <i class="fas fa-shopping-bag"></i>
+                    <span class="cart-badge" id="cartCount">0</span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="contact-hero">
+        <div class="container-lg">
+            <h1>Get In Touch</h1>
+            <p>Have questions? We're here to help. Reach out to our student support team and we'll get back to you ASAP.</p>
+        </div>
+    </section>
+
+    <!-- Main Contact Section -->
+    <section class="contact-main">
+        <div class="container-lg">
+            <div class="contact-grid">
+                <!-- Contact Form -->
+                <div class="contact-form-section">
+                    <h2>Send Us A Message</h2>
+                    <p>Fill out the form below and we'll respond within 24 hours. For urgent matters, please call or text us directly.</p>
+
+                    <div class="success-message" id="successMessage">
+                        <i class="fas fa-check-circle"></i> <strong>Success!</strong> Your message has been sent. We'll get back to you within 24 hours.
+                    </div>
+
+                    <form id="contactForm" onsubmit="handleSubmit(event)">
+                        <div class="form-group">
+                            <label for="name">Full Name *</label>
+                            <input type="text" id="name" name="name" required placeholder="Juan Dela Cruz">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="email">Email Address *</label>
+                            <input type="email" id="email" name="email" required placeholder="juan@example.com">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="phone">Phone Number</label>
+                            <input type="tel" id="phone" name="phone" placeholder="+63 912 345 6789">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="subject">Subject *</label>
+                            <select id="subject" name="subject" required>
+                                <option value="">Select a topic...</option>
+                                <option value="order">Order Inquiry</option>
+                                <option value="product">Product Question</option>
+                                <option value="shipping">Shipping & Delivery</option>
+                                <option value="return">Returns & Exchanges</option>
+                                <option value="size">Size & Fit Help</option>
+                                <option value="collaboration">Collaboration/Partnership</option>
+                                <option value="feedback">Feedback</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="message">Message *</label>
+                            <textarea id="message" name="message" required placeholder="Tell us how we can help..."></textarea>
+                        </div>
+
+                        <button type="submit" class="btn-submit" id="submitBtn">
+                            <i class="fas fa-paper-plane"></i> Send Message
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Contact Info -->
+                <div class="contact-info">
+                    <h2>Other Ways to Reach Us</h2>
+
+                    <div class="info-card">
+                        <div class="info-card-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <h3>Email Support</h3>
+                        <p>For general inquiries and support:<br>
+                        <a href="mailto:faq@nestargaze.com">faq@nestargaze.com</a></p>
+                        <p style="margin-top: 12px;">For order-related questions:<br>
+                        <a href="mailto:orders@nestargaze.com">orders@nestargaze.com</a></p>
+                    </div>
+
+                    <div class="info-card">
+                        <div class="info-card-icon">
+                            <i class="fas fa-phone-alt"></i>
+                        </div>
+                        <h3>Call or Text Us</h3>
+                        <p>Monday - Saturday: 9:00 AM - 8:00 PM<br>
+                        Sunday: 10:00 AM - 6:00 PM<br>
+                        <a href="tel:+639123456789">+63 912 345 6789</a></p>
+                    </div>
+
+                    <div class="info-card">
+                        <div class="info-card-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <h3>Visit Our Office</h3>
+                        <p>NESTAR GAZE HQ<br>
+                        IT Park, Salinas Drive<br>
+                        Lahug, Cebu City 6000<br>
+                        Philippines</p>
+                    </div>
+
+                    <div class="hours-card">
+                        <h3>Business Hours</h3>
+                        <div class="hours-row">
+                            <span class="hours-day">Monday - Friday</span>
+                            <span class="hours-time">9:00 AM - 8:00 PM</span>
+                        </div>
+                        <div class="hours-row">
+                            <span class="hours-day">Saturday</span>
+                            <span class="hours-time">9:00 AM - 8:00 PM</span>
+                        </div>
+                        <div class="hours-row">
+                            <span class="hours-day">Sunday</span>
+                            <span class="hours-time">10:00 AM - 6:00 PM</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="faq-section">
+        <div class="container-lg">
+            <h2>Frequently Asked Questions</h2>
+            <div class="faq-container">
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleFAQ(this)">
+                        <span>How long does shipping take?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            Standard shipping within Metro Manila takes 2-3 business days. Provincial deliveries take 4-7 business days. Free shipping on orders over ₱5,000. Express shipping available for an additional fee.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleFAQ(this)">
+                        <span>What is your return policy?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            We offer a 30-day return policy for unworn, unwashed items with original tags attached. Simply contact us to initiate a return. Refunds are processed within 5-7 business days after we receive your return.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleFAQ(this)">
+                        <span>How do I track my order?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            Once your order ships, you'll receive a tracking number via email. You can also check your order status by contacting our support team with your order number.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleFAQ(this)">
+                        <span>Do you offer international shipping?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            Currently, we only ship within the Philippines. We're working on expanding internationally—stay tuned! Follow us on social media for updates.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleFAQ(this)">
+                        <span>What payment methods do you accept?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            We accept all major credit/debit cards (Visa, Mastercard, Amex), PayPal, GCash, and Cash on Delivery (COD) for orders within Metro Manila.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleFAQ(this)">
+                        <span>How do your sizes fit?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            Our pieces run true to size with a relaxed, streetwear fit. Check our size guide on each product page for detailed measurements. When in doubt, size up for an oversized look or contact us for personalized sizing help.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Social Section -->
+    <section class="social-section">
+        <div class="container-lg">
+            <h2>Connect With Us</h2>
+            <p>Follow us on social media for the latest drops, behind-the-scenes content, and exclusive student discounts. We're most active on Instagram!</p>
+            
+            <div class="social-links">
+                <a href="https://instagram.com/nestargaze" class="social-link" target="_blank" rel="noopener" title="Instagram">
+                    <i class="fab fa-instagram"></i>
+                </a>
+                <a href="https://facebook.com/nestargaze" class="social-link" target="_blank" rel="noopener" title="Facebook">
+                    <i class="fab fa-facebook-f"></i>
+                </a>
+                <a href="https://twitter.com/nestargaze" class="social-link" target="_blank" rel="noopener" title="Twitter">
+                    <i class="fab fa-twitter"></i>
+                </a>
+                <a href="https://tiktok.com/@nestargaze" class="social-link" target="_blank" rel="noopener" title="TikTok">
+                    <i class="fab fa-tiktok"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container-lg">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h5>GET HELP</h5>
+                    <ul>
+                        <li><a href="#">Order Status</a></li>
+                        <li><a href="#">Shipping Info</a></li>
+                        <li><a href="#">Returns</a></li>
+                        <li><a href="contact-us.html">Contact Us</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h5>ABOUT</h5>
+                    <ul>
+                        <li><a href="our-story.html">Our Story</a></li>
+                        <li><a href="#">News</a></li>
+                        <li><a href="#">Careers</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h5>SHOP</h5>
+                    <ul>
+                        <li><a href="shop.html">All Products</a></li>
+                        <li><a href="hoodies.html">Hoodies</a></li>
+                        <li><a href="tees.html">Graphic Tees</a></li>
+                        <li><a href="sale.html">Sale</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h5>FOLLOW US</h5>
+                    <div class="social-icons">
+                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                    </div>
+
+                    <div class="newsletter-signup">
+                        <input type="email" placeholder="Enter your email" id="footerEmail">
+                        <button onclick="subscribeNewsletter()" class="btn-subscribe">SUBSCRIBE</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <div>&copy; 2025 NESTAR GAZE. All Rights Reserved.</div>
+                <div class="footer-links">
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms of Use</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Sidebars -->
+    <div class="cart-sidebar" id="cartSidebar">
+        <div class="cart-header">
+            <h4>Shopping Cart</h4>
+            <button onclick="toggleCart()" class="close-btn"><i class="fas fa-times"></i></button>
+        </div>
+        <div class="cart-items" id="cartItems">
+            <p class="empty-cart">Your cart is empty</p>
+        </div>
+        <div class="cart-footer">
+            <div class="cart-total">
+                <strong>Total:</strong>
+                <span id="cartTotal">₱0.00</span>
+            </div>
+            <button class="btn-checkout" onclick="checkout()">Checkout</button>
+            <button class="btn-continue" onclick="toggleCart()">Continue Shopping</button>
+        </div>
+    </div>
+
+    <div class="wishlist-sidebar" id="wishlistSidebar">
+        <div class="wishlist-header">
+            <h4>Wishlist</h4>
+            <button onclick="closeAllSidebars()" class="close-btn"><i class="fas fa-times"></i></button>
+        </div>
+        <div class="wishlist-items" id="wishlistItems">
+            <p class="empty-wishlist">Your wishlist is empty</p>
+        </div>
+    </div>
+
+    <div class="toast-notification" id="notification"></div>
+    <div class="sidebar-backdrop" id="backdrop" onclick="closeAllSidebars()"></div>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
+    <script src="../js/products.js"></script>
+    <script src="../js/notifications.js"></script>
+    <script src="../js/cart.js"></script>
+    <script src="../js/wishlist.js"></script>
+    <script src="../js/wishlist-buttons.js"></script>
+    <script src="../js/ui-interactions.js"></script>
+    <script src="../js/search.js"></script>
+    
+  <script>
+function toggleFAQ(button) {
+    const item = button.parentElement;
+    item.classList.toggle("active");
+}
+</script>
