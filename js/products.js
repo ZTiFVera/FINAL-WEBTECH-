@@ -22,7 +22,7 @@ const products = [
         badge: "NEW",
         badgeClass: "",
         category: "hoodies",
-        img: getImagePath("GREEN.jpg"), // ✅ FIXED
+        img: getImagePath("premiumziphoodie.webp"), // ✅ FIXED
         rating: 4.8,
         reviews: 45,
         stock: 15,
@@ -40,7 +40,7 @@ const products = [
         badge: "HOT",
         badgeClass: "",
         category: "hoodies",
-        img: getImagePath("GREEN.jpg"), // ✅ FIXED
+        img: getImagePath("heavyweightshirt.jpg"), // ✅ FIXED
         rating: 4.7,
         reviews: 38,
         stock: 22,
@@ -58,7 +58,7 @@ const products = [
         badge: "SALE",
         badgeClass: "sale",
         category: "hoodies",
-        img: getImagePath("GREEN.jpg"), // ✅ FIXED
+        img: getImagePath("navycristieoversizedhod.webp"), // ✅ FIXED
         rating: 4.6,
         reviews: 32,
         stock: 8,
@@ -76,7 +76,7 @@ const products = [
         badge: "NEW",
         badgeClass: "",
         category: "hoodies",
-        img: getImagePath("GREEN.jpg"), // ✅ FIXED
+        img: getImagePath("vintagehod.jpg"), // ✅ FIXED
         rating: 4.5,
         reviews: 28,
         stock: 18,
@@ -87,14 +87,14 @@ const products = [
     },
     {
         id: 5,
-        name: "Tech Hoodie",
+        name: "West CoastHoodie",
         brand: "NESTAR GAZE",
         price: 4500,
         oldPrice: 0,
         badge: "BESTSELLER",
         badgeClass: "",
         category: "hoodies",
-        img: getImagePath("GREEN.jpg"), // ✅ FIXED
+        img: getImagePath("westcoasthood2.jpg"), // ✅ FIXED
         rating: 4.9,
         reviews: 52,
         stock: 25,
@@ -107,14 +107,14 @@ const products = [
     // === GRAPHIC TEES ===
     {
         id: 6,
-        name: "Oversized Graphic Tee",
+        name: "Vengeance Graphic Tee",
         brand: "NESTAR GAZE",
         price: 1900,
         oldPrice: 0,
         badge: "NEW",
         badgeClass: "",
         category: "tees",
-        img: getImagePath("GREEN.jpg"), // ✅ FIXED
+        img: getImagePath("vengeanceshirt.webp"), // ✅ FIXED
         rating: 4.7,
         reviews: 41,
         stock: 30,
@@ -125,14 +125,14 @@ const products = [
     },
     {
         id: 7,
-        name: "Vintage Band Tee",
+        name: "UFC Fashion Tee",
         brand: "NESTAR GAZE",
         price: 1700,
         oldPrice: 0,
         badge: "",
         badgeClass: "",
         category: "tees",
-        img: getImagePath("GREEN.jpg"), // ✅ FIXED
+        img: getImagePath("ufcfashionshirt2.jpg"), // ✅ FIXED
         rating: 4.6,
         reviews: 35,
         stock: 20,
@@ -143,14 +143,14 @@ const products = [
     },
     {
         id: 8,
-        name: "Streetwear Graphic Tee",
+        name: "90008 BULLDOG- Graphic Tee",
         brand: "NESTAR GAZE",
         price: 1600,
         oldPrice: 2200,
         badge: "-27%",
         badgeClass: "sale",
         category: "tees",
-        img: getImagePath("GREEN.jpg"), // ✅ FIXED
+        img: getImagePath("streetweartee.jpg"), // ✅ FIXED
         rating: 4.5,
         reviews: 28,
         stock: 12,
@@ -161,14 +161,14 @@ const products = [
     },
     {
         id: 9,
-        name: "Urban Art Tee",
+        name: "CIVIL Concrete  Tee",
         brand: "NESTAR GAZE",
         price: 1800,
         oldPrice: 0,
         badge: "HOT",
         badgeClass: "",
         category: "tees",
-        img: getImagePath("GREEN.jpg"), // ✅ FIXED
+        img: getImagePath("civilcontee.jpg"), // ✅ FIXED
         rating: 4.8,
         reviews: 47,
         stock: 28,
@@ -179,14 +179,14 @@ const products = [
     },
     {
         id: 10,
-        name: "Minimalist Tee",
+        name: "Hell Pulse Boxy Shirt Tee",
         brand: "NESTAR GAZE",
         price: 1500,
         oldPrice: 0,
         badge: "NEW",
         badgeClass: "",
         category: "tees",
-        img: getImagePath("GREEN.jpg"), // ✅ FIXED
+        img: getImagePath("hellpulseboxyshirt.jpg"), // ✅ FIXED
         rating: 4.4,
         reviews: 22,
         stock: 35,
@@ -199,32 +199,32 @@ const products = [
     // === PANTS ===
     {
         id: 11,
-        name: "Cargo Pants",
+        name: "Camo Straight Wide Leg Pants ",
         brand: "NESTAR GAZE",
         price: 3400,
         oldPrice: 0,
         badge: "HOT",
         badgeClass: "",
         category: "pants",
-        img: getImagePath("GREEN.jpg"), // ✅ FIXED
+        img: getImagePath("camopants.webp"), // ✅ FIXED
         rating: 4.7,
         reviews: 39,
         stock: 20,
-        description: "Utility cargo pants with multiple pockets.",
+        description: "Utility carmo pants with straight Wide Pants.",
         features: ["Multiple Pockets", "Durable Fabric", "Adjustable Waist", "Tapered Leg"],
         sizes: ["28", "30", "32", "34", "36"],
         colors: ["Black", "Olive", "Khaki"]
     },
     {
         id: 12,
-        name: "Slim Fit Jeans",
+        name: "John Galt Brown Priscilla Flare Pants",
         brand: "NESTAR GAZE",
         price: 2900,
         oldPrice: 3800,
         badge: "-24%",
         badgeClass: "sale",
         category: "pants",
-        img: getImagePath("GREEN.jpg"), // ✅ FIXED
+        img: getImagePath("galtbrownpants.webp"), // ✅ FIXED
         rating: 4.6,
         reviews: 33,
         stock: 15,
@@ -235,14 +235,14 @@ const products = [
     },
     {
         id: 13,
-        name: "Baggy Pants",
+        name: " FORD Knee Paneled Baggy Carpenter Sweatpants ",
         brand: "NESTAR GAZE",
         price: 3200,
         oldPrice: 0,
         badge: "NEW",
         badgeClass: "",
         category: "pants",
-        img: getImagePath("GREEN.jpg"), // ✅ FIXED
+        img: getImagePath("fordkneepants.webp"), // ✅ FIXED
         rating: 4.5,
         reviews: 26,
         stock: 18,
@@ -253,14 +253,14 @@ const products = [
     },
     {
         id: 14,
-        name: "Track Pants",
+        name: "Dylan Cargo  Pants",
         brand: "NESTAR GAZE",
         price: 2600,
         oldPrice: 0,
         badge: "BESTSELLER",
         badgeClass: "",
         category: "pants",
-        img: getImagePath("GREEN.jpg"), // ✅ FIXED
+        img: getImagePath("cargodylanpants.webp"), // ✅ FIXED
         rating: 4.8,
         reviews: 51,
         stock: 40,
@@ -271,14 +271,14 @@ const products = [
     },
     {
         id: 15,
-        name: "Cargo Joggers",
+        name: "RARE DNM EDIT Metallic Black Baggy Carpenter Jeans",
         brand: "NESTAR GAZE",
         price: 2800,
         oldPrice: 0,
         badge: "NEW",
         badgeClass: "",
         category: "pants",
-        img: getImagePath("GREEN.jpg"), // ✅ FIXED
+        img: getImagePath("raredenimpants.jpg"), // ✅ FIXED
         rating: 4.6,
         reviews: 29,
         stock: 25,
@@ -291,32 +291,32 @@ const products = [
     // === SALE ITEMS ===
     {
         id: 16,
-        name: "Streetwear Bomber",
+        name: " Faux Leather Bomber Jacket",
         brand: "NESTAR GAZE",
         price: 2800,
         oldPrice: 4500,
         badge: "-38%",
         badgeClass: "sale",
         category: "sale",
-        img: getImagePath("GREEN.jpg"), // ✅ FIXED
+        img: getImagePath("fauxjacket.jpg"), // ✅ FIXED
         rating: 4.5,
         reviews: 24,
         stock: 10,
-        description: "Classic bomber jacket with premium satin finish.",
+        description: "Classic faux jacket with premium satin finish.",
         features: ["Satin Finish", "Ribbed Cuffs", "Zip Closure", "Lightweight"],
         sizes: ["S", "M", "L", "XL"],
         colors: ["Black", "Olive"]
     },
     {
         id: 17,
-        name: "Nylon Windbreaker",
+        name: "Clyde Studded Gas Jacket",
         brand: "NESTAR GAZE",
         price: 1600,
         oldPrice: 2800,
         badge: "-43%",
         badgeClass: "sale",
         category: "sale",
-        img: getImagePath("GREEN.jpg"), // ✅ FIXED
+        img: getImagePath("studjacket.jpg"), // ✅ FIXED
         rating: 4.5,
         reviews: 19,
         stock: 8,
@@ -327,32 +327,32 @@ const products = [
     },
     {
         id: 18,
-        name: "Classic Dad Hat",
+        name: " Brooks Medium Blue Denim Jacket",
         brand: "NESTAR GAZE",
         price: 900,
         oldPrice: 1500,
         badge: "-40%",
         badgeClass: "sale",
         category: "sale",
-        img: getImagePath("GREEN.jpg"), // ✅ FIXED
+        img: getImagePath("brooksdenimjacket.webp"), // ✅ FIXED
         rating: 4.3,
         reviews: 15,
         stock: 50,
-        description: "Unstructured dad hat with adjustable strap.",
+        description: "Upgrade your outerwear with the Brooks Medium Blue Denim Jacket. Made with a medium blue wash and rigid.",
         features: ["Unstructured", "Adjustable", "Cotton Twill", "Curved Brim"],
         sizes: ["One Size"],
         colors: ["Black", "Navy", "Beige", "White"]
     },
     {
         id: 19,
-        name: "Vintage Jacket",
+        name: "NY Rhinestone Baggy Sweatpants",
         brand: "NESTAR GAZE",
         price: 3200,
         oldPrice: 5200,
         badge: "-38%",
         badgeClass: "sale",
         category: "sale",
-        img: getImagePath("GREEN.jpg"), // ✅ FIXED
+        img: getImagePath("baggysweatpants.webp"), // ✅ FIXED
         rating: 4.6,
         reviews: 31,
         stock: 6,
@@ -363,14 +363,14 @@ const products = [
     },
     {
         id: 20,
-        name: "Urban Sneakers",
+        name: "Your Favorite Palm Desert Baby T-Shirt",
         brand: "NESTAR GAZE",
         price: 4200,
         oldPrice: 6500,
         badge: "-35%",
         badgeClass: "sale",
         category: "sale",
-        img: getImagePath("GREEN.jpg"), // ✅ FIXED
+        img: getImagePath("palmdeseserttee.webp"), // ✅ FIXED
         rating: 4.7,
         reviews: 42,
         stock: 12,
@@ -383,14 +383,14 @@ const products = [
     // === NEW ARRIVALS ===
     {
         id: 21,
-        name: "Limited Edition Hoodie",
+        name: "90008 by CSC Handbook Hoodie",
         brand: "NESTAR GAZE",
         price: 5200,
         oldPrice: 0,
         badge: "NEW",
         badgeClass: "",
         category: "new",
-        img: getImagePath("GREEN.jpg"), // ✅ FIXED
+        img: getImagePath("handbookhoodie.jpg"), // ✅ FIXED
         rating: 5.0,
         reviews: 8,
         stock: 5,
@@ -401,14 +401,14 @@ const products = [
     },
     {
         id: 22,
-        name: "Future Tech Tee",
+        name: "Under The Hum T-Shirt",
         brand: "NESTAR GAZE",
         price: 2100,
         oldPrice: 0,
         badge: "NEW",
         badgeClass: "",
         category: "new",
-        img: getImagePath("GREEN.jpg"), // ✅ FIXED
+        img: getImagePath("underhumtee.jpg"), // ✅ FIXED
         rating: 4.9,
         reviews: 12,
         stock: 20,
@@ -419,14 +419,14 @@ const products = [
     },
     {
         id: 23,
-        name: "Modern Cargo Pants",
+        name: "Your Favorite Limited Edition Skimmer T-Shirt",
         brand: "NESTAR GAZE",
         price: 3700,
         oldPrice: 0,
         badge: "NEW",
         badgeClass: "",
         category: "new",
-        img: getImagePath("GREEN.jpg"), // ✅ FIXED
+        img: getImagePath("skimmertee.webp"), // ✅ FIXED
         rating: 4.8,
         reviews: 16,
         stock: 15,
@@ -437,14 +437,14 @@ const products = [
     },
     {
         id: 24,
-        name: "Contemporary Jacket",
+        name: "Obscura Straight Leg Sweatpants",
         brand: "NESTAR GAZE",
         price: 4800,
         oldPrice: 0,
         badge: "NEW",
         badgeClass: "",
         category: "new",
-        img: getImagePath("GREEN.jpg"), // ✅ FIXED
+        img: getImagePath("obscurapants.webp"), // ✅ FIXED
         rating: 4.7,
         reviews: 10,
         stock: 10,
@@ -455,14 +455,14 @@ const products = [
     },
     {
         id: 25,
-        name: "Trendy Sweatshirt",
+        name: "Neztar Gaze Cyber Hoodie ",
         brand: "NESTAR GAZE",
         price: 3500,
         oldPrice: 0,
         badge: "NEW",
         badgeClass: "",
         category: "new",
-        img: getImagePath("GREEN.jpg"), // ✅ FIXED
+        img: getImagePath("cyberhoodie.webp"), // ✅ FIXED
         rating: 4.9,
         reviews: 14,
         stock: 22,
